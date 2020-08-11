@@ -1,0 +1,3 @@
+!Shutdown|shutdown
+control-irq|This sends the interrupt 'shutdown'. It is supposed to
+run a full shutdown immediately. The Main script is stopped.|

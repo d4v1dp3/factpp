@@ -1,0 +1,13 @@
+FACT
+|<h4>Trigger rate</h4>
+If the dim network is online and the trigger master (ftmctrl) in in state
+TriggerOn, the current camera trigger rate is displayed. If the
+bias voltage is swicthed on (biasctrl in state VoltageOn), also the
+median patch threshold is displayed in ()-parenthesis.
+
+<ul class='help'>
+<li>Trigger rate between 15Hz and 100Hz</li>
+<li>Trigger rate below 15Hz</li>
+<li>Trigger rate above 100Hz</li>
+</ul>
+|

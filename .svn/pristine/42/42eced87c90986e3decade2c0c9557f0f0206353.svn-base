@@ -1,0 +1,8 @@
+Feedback
+bias|Temp Offset|$0 V|
+bias|Overvoltage nominal|$0 V|
+bias|Overvoltage min|$0 V|
+bias|Overvoltage med|$0 V|
+bias|Overvoltage avg|$0 V|
+bias|Overvoltage max|$0 V|
+|camera=cam-feedback-overvoltage.bin/ V|

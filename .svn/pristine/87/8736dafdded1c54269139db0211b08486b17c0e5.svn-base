@@ -1,0 +1,13 @@
+Tracking
+|Source list||source-list
+|Source visbility||visibility
+||
+|<h4>Last known tracking position</h4>|
+|Source Name|$0|source
+fact|Right ascension|$0 h
+fact|Declination|$0&deg;
+|Zenith distance|$0&deg;|pointing
+|Azimuth|$0&deg;|pointing
+fact|Control deviation|$0"
+fact|Distance to moon|$0&deg;
+|hist=hist-control-deviation.bin/"|

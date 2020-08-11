@@ -1,0 +1,4 @@
+!Turn voltage off|off
+control-irq|This sends the interrupt 'off'. It is supposed to
+ramp down the camera voltage, switch off the trigger and close open files.
+No other action is taken. The Main script is stopped.|

@@ -1,0 +1,7 @@
+Sensor temperatures
+|
+The displayed values are derived from the 28 working temperature
+sensors. The displayed graphics is trigger patch wise  linearly
+interpolated or extrapolated. The color scale has its center always
+at the average of the 160 calculated temperature values and a range
+of +/- 1.5 &deg;C is displayed|

@@ -1,0 +1,19 @@
+Visibility
+|
+The visibility curve shows the altitude of all sources visible
+between the start of the astronomical twilight in the evening and the
+end of the astronomical twilight in the morning. It only shows sources visibly above
+65&deg; zenith distance.
+
+The title shows roughly the start and end time of the time range diaplayed
+and the number of  minutes corresponding to one of the twenty
+steps on the x-axis.
+
+To relate the curves to the visible sources, the order in which they
+culminate is given above the graphics. For sources culminating within
+the displayed time-range, also their zenith distance at culmination is
+listed. 
+
+Note that the zenith distance is counted from the zenith, while
+the altitude is counted from the horizon: Zd=90&deg;-Alt  
+|

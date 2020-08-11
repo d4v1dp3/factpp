@@ -1,0 +1,35 @@
+System status
+|DIM|$0|
+|Dim Control|$0|scriptlog
+|MCP|$0|observations
+|Datalogger|$0|
+|Drive control|$0|
+|Drive PC time check|$0|
+|FAD control|$0|fad
+|FTM control|$0|ftm
+|Bias control|$0|
+|Feedback|$0|
+|Rate control|$0|
+|FSC control|$0|
+|PFmini control|$0|pfmini
+|Bias Temp|$0|biastemp
+|GPS control|$0|gps
+|SQM control|$0|sqm
+|Agilent control (24V)|$0|agilent24
+|Agilent control (50V)|$0|agilent50
+|Agilent control (80V)|$0|agilent80
+|Power control|$0|
+|Lid control|$0|
+|Ratescan|$0|ratescan
+|Magic Weather|$0|
+|TNG Weather|$0|tngdata
+|GTC Dust|$0|gtcdust
+|Magic Lidar|$0|
+|Temperature|$0|temperature
+|Rain Sensor|$0|rainsensor
+|Chat server|$0|chat
+|Skype client|$0|
+|Free space (newdaq)|$0|
+|Free space (newdata)|$0|
+|Smartfact runtime|$0|errorhist
+

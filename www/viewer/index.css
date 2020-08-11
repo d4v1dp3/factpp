@@ -1,0 +1,61 @@
+.CodeMirror { border: 0; font-size:9pt; }
+
+.cm-s-fact.CodeMirror { background: #000000; color: /*#F8F8F8*/ lightgrey; font-weight:bold; }
+.cm-s-fact .CodeMirror-selected { background: #253B76 !important; }
+.cm-s-fact .CodeMirror-gutters { background: #0C1021; border-right: 0; }
+.cm-s-fact .CodeMirror-linenumber { color: #888; }
+.cm-s-fact .CodeMirror-cursor { border-left: 1px solid #C7C7C7 !important; }
+
+.cm-s-fact .cm-keyword { color: #F8F8F8 /*#FBDE2D*/; } /* new, var, for, if, return */
+.cm-s-fact .cm-atom { color: #C8C8C8; }    /* null */
+.cm-s-fact .cm-number { color: /*red*/ #D8FA3C; }  /* 0, 1, 2, 3, ... */
+
+.cm-s-fact .cm-variable { color: #FFEA80; }  /* global variables */
+.cm-s-fact .cm-variable-2 { color:#FFB450; } /* local variables */
+.cm-s-fact .cm-property { color: #FF6400; }  /* properties */
+
+.cm-s-fact .cm-operator { color: lightblue;/*blueviolet*/ #FBDE2D;}
+.cm-s-fact .cm-comment { color: olive/*#5EAE5E*/; }
+.cm-s-fact .cm-string { color: #61CE3C; }
+.cm-s-fact .cm-string-2 { color: #61CE3C; }
+
+.cm-s-fact .CodeMirror-activeline-background {background: #252020 !important;}
+.cm-s-fact .CodeMirror-matchingbracket {color:red !important; font-weight:bold !important;}
+
+.CodeMirror-focused .cm-matchhighlight
+{
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==);
+    background-position: bottom;
+    background-repeat: repeat-x;
+}
+
+/* From FTE:
+   keyword:   white
+   atom:      grey
+   variable:  grey
+   number:    red
+   operator:  dark cyan
+   comment:   military green
+   string:    yellow
+   brackets:  dark cyan
+*/
+
+.myaccordion .ui-accordion-header
+{
+    background-color: #ccc;  
+    margin: 0px;
+    font-size:10pt;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.myaccordion .ui-accordion-content
+{
+    color: #000;
+    font-size: 10pt; 
+    padding-top: 1ex;
+    padding-bottom: 1em;
+    padding-left: 2ex;
+}

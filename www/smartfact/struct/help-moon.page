@@ -1,0 +1,42 @@
+Moon
+|
+<h4>Moon rise/set</h4>
+Moon rise, moon culmination and moon set are always caluclated such
+that the time displayed refers to the next moon rise, culmination or
+set respectively. A blue background marks the next event to happen.
+
+<h4>Disk</h4>
+The moon disk is the visible brightness of the moon. The time in brackets
+is the time to the next moon set or rise, depening on which event
+happens earlier. An up-arrow denotes that it is the time to the moon rise,
+a down-arrow that it is the time to the moon set.
+
+<h4>Position</h4>
+If the moon is above horizon, its current position is displayed in local
+coordinates. The background color represents
+<ul class='help'>
+<li>The moon is above 25&deg; zenith distance</li>
+<li>The moon is between 25&deg; and 45&deg; zenith distance</li>
+<li>The moon is lower than 45&deg; zenith distance</li>
+<li>The moon is not visible</li>
+</ul>
+The assumption is that the further the moon is from the zenith, the
+more light is scattered and the more influence the moon has on
+the observations. It does not directly translate into the particular
+observation conditions or observability.
+
+<h4>Source distance to moon</h4>
+The table displays the angular distance between the sources from the
+database and the moon at any time of the day. The colors represent
+<ul class='help'>
+<li>No moon light is directly hitting the G-APDs</li>
+<li>The distance is very close to the direct or indirect field-of-view of the cones.</li>
+<li>The moon is within th efield-of-view. This condition should be avoided as much as possible.</li>
+</ul>
+
+<i>Note that the color scales are not well motivated as of today. Anybody
+is invited to investigate this issue in more details.</i>
+|
+
+
+

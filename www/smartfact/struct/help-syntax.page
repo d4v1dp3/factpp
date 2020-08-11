@@ -1,0 +1,60 @@
+Syntax
+|
+To write your own page you need to understand the syntax of the files.
+The first line in the file is the title. It is just the title
+displayed. If the first character is an asterix (*) then the page is
+considered a page which is intented for script submission (<I>control
+page</I>). If the page name starts with <B>help-</B>, the page is
+considered a help page and the help symbol is inactive. If the page is
+a control page, the submitted script with have the name of the page
+without extension,  with the extension <B>.dim</B>, <I>e.g.</I>
+if the page name is <I>mypage.page</I> the submitted scripts
+name is <I>mypage.dim</I>.
+
+Each following line of the file describes a row in the table and is
+split by pipes (&#124;). To use a pipe in a line you have to 
+write &#38;#124;. Lines which containes less than two pipes are
+concatenated until the number of pipes in one line is at least two. So
+the description of one row can look like
+
+<pre>
+leftlink&#124;Description&#124;format&#124;rightlink
+</pre>
+
+but also
+
+<pre>
+leftlink&#124;<br/>
+Description<br/>
+&#124;format&#124;rightlink
+</pre>
+
+If <I>leftlink</I> is available, a left arrow is displayed on the left
+and the row will link to page called <I>leftlink.page</I>. The same for
+<I>rightlink</i>, just that a right arrow is displayed on the right instead.
+Both are mutually exclusive, and can also be omotted.
+
+The <I>Description</I> is just a text which appears on the left side of
+the row in bold-face. if the format is omitted, it will fill the full
+width of the table and be displayed in normal-face. Consequently, a
+simple text entry could look like:
+
+<pre>
+&#124;<br/>
+This is my simple text entry.&lt;br/&gt;<br/>
+We can have more lines...
+
+...and even a paragraph-break.&lt;br/&gt;<br/>
+&#124;
+</pre>
+
+Every line starting with a # is ignored.
+
+The description can also have special contents (see below).
+
+If the help is not a help-page, a data file is loaded and its data is
+displayed on the right of each row according the format given.
+|
+|Special tag descriptions||help-description
+|Data file and data file format||help-datafile
+|Binary file format||help-binaryfile

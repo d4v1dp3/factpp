@@ -1,0 +1,75 @@
+.up {
+    padding:0 5px 4px 7px;
+    position:fixed;
+    top:0;
+    right:0;
+    background-color:#ebe7e6;
+}
+
+.dn {
+    padding:0 5px 4px 7px;
+    padding-top:0px;
+    position:fixed;
+    bottom:0;
+    right:0;
+    background-color:#ebe7e6;
+}
+
+#nav {
+    position:fixed;
+    right:90px;
+    top:0;
+    background-color:#ebe7e6;
+}
+
+#nav ul {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+
+#nav li {
+    float:left;
+    padding:0;
+    margin:0;
+}
+
+#nav li a {
+    padding:0 9px 4px 11px;
+    display:block;
+    color:#000; 
+    color:navy;
+    text-decoration:none; 
+    solid #ccc; 
+}
+
+#nav li a:hover { 
+    color:#f00; 
+}
+
+#nav ul ul {
+    display:none; 
+    position:absolute; 
+    z-index:999; 
+}
+
+#nav li li { 
+    float:none; 
+}
+
+#nav li li a { 
+    background:#EBE7E6!important; 
+    text-align:left; 
+    height:auto; 
+    line-height:1; 
+    width:auto; 
+    padding:4px 20px 4px 22px; 
+    border:1px solid #D0D0D0; 
+    border-top:none; 
+    margin-right:0; 
+}
+
+/* IE6 Bugfix... */
+* html li li { 
+    display:inline; 
+} 

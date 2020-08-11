@@ -1,0 +1,39 @@
+#!/bin/bash
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title Agilent voltage
+graph_vlabel volt
+graph_category environment
+agilent_volt1.label Camera voltage (51V)
+agilent_volt2.label Interlock voltage (24V)
+agilent_volt3.label Bias voltage (80V)
+EOM
+        exit 0;;
+esac
+
+DATA=`echo -e -n "meas:volt?\n" | nc 10.0.100.220 5025`
+RC=$?
+DATA=`printf %.3f ${DATA}`
+
+if [ "$RC" == "0" -a "$DATA" != "0.000"  ] ; then
+   echo agilent_volt1.value $DATA
+fi
+
+DATA=`echo -e -n "meas:volt?\n" | nc 10.0.100.224 5025`
+RC=$?
+DATA=`printf %.3f ${DATA}`
+
+if [ "$RC" == "0" -a "$DATA" != "0.000"  ] ; then
+   echo agilent_volt2.value $DATA
+fi
+
+DATA=`echo -e -n "meas:volt?\n" | nc 10.0.100.222 5025`
+RC=$?
+DATA=`printf %.3f ${DATA}`
+
+if [ "$RC" == "0" -a "$DATA" != "0.000" ] ; then
+   echo agilent_volt3.value $DATA
+fi
+

@@ -1,0 +1,8 @@
+Currents
+bias|Calibrated|$0|
+bias|Min. current per G-APD|$0&micro;A|
+bias|Med. current per G-APD|$0&micro;A|
+bias|Avg. current per G-APD|$0&micro;A|
+bias|Max. current per G-APD|$0&micro;A|
+bias|Power camera [G-APD]|$0|
+|camera=cam-biascontrol-current.bin/ &micro;A|

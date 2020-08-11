@@ -1,0 +1,47 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Amplitude vs. Voltage Offset Measurement
+
+# ==========================================================================
+# Script for Amplitude vs. Voltage Offset Measurement
+
+# call it by: .x ScriptsForDimCtrl/AmplVsOv.dim V=<voltage_offset_value>
+
+# ----------------------------------------------------
+
+
+> changing feedback voltage offset to ${V}
+
+FEEDBACK/STOP                           # STOP FEEDBACK
+.w 1000                                 # wait 1 second
+
+FEEDBACK/START_CURRENT_CONTROL ${V}     # set Current_Control to given Offset value
+
+> ...checking if Voltage is ON
+# will ramp if not at nominal, will skip ramping if Voltage on
+.s BIAS_CONTROL 7 3000 1
+> Voltage is OFF, will ramp to nominal Voltage
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+.s BIAS_CONTROL 9
+.s BIAS_CONTROL 5
+> ...ramping
+.s BIAS_CONTROL 9
+
+:1
+> Voltage is ON, waiting 45 sec for current_control to stabilize
+.w 42000                                # wait 30 second for the current updates
+
+> OPERATOR: Write down: V_offset ${V}, Med(V), Med(I) and the Run number to the Excel file
+
+> starting LPext with 1000 Events       # start external Lightpulser Run with 1000 Events
+# take a ExtLP run
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeExtLpRun.dim
+
+FEEDBACK/STOP                           # STOP FEEDBACK
+> ...Feedback stopped
+>
+> OPERATOR: make sure to restart the feedback with the correct offset when resuming data taking
+>
+> ...done

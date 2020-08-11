@@ -1,0 +1,6 @@
+Pressure
+weather|Current|$0 hPa|
+weather|Minimum|$0 hPa|
+weather|Average|$0 hPa|
+weather|Maximum|$0 hPa|
+|hist=hist-magicweather-press.bin/ hPa|

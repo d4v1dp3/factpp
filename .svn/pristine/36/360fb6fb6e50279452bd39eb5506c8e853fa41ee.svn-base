@@ -1,0 +1,7 @@
+*Move telescope|doMoveTelescope
+control-drive|To move the telescope to the given local coordinates
+press the '&gt;' button at the bottom of the screen.|
+|input=Zenith distance (-100 - 100) [deg]/zd/|
+|input=Azimuth (-290 - 80, N&#61;0, E&#61;90) [deg]/az/|
+||
+|Stop telescope||dodrivestop

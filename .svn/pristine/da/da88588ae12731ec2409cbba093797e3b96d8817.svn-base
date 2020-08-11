@@ -1,0 +1,4 @@
+Interrupt Controls
+|Voltage off||irqOff
+|Shutdown||irqShutdown
+|Reload Sources||irqReloadSources

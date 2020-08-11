@@ -1,0 +1,26 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Checking the system statuses if they are ready for data taking
+# ==========================================================================
+
+> --------------------------------------
+> Checking the system statuses of:
+> FEEDBACK, BIAS and FAD
+> --------------------------------------
+
+> ...waiting for FEEDBACK
+>    to be in state 12: CurrentControl
+.s FEEDBACK 12
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+
+> ...waiting for FAD_CONTROL
+>    to be in state 4: Connected
+
+.s FAD_CONTROL 4
+> ...system statuses OK
+> --------------------------------------
+>-

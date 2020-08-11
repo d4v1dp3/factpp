@@ -1,0 +1,12 @@
+Drive Controls
+|Track position (ra/dec)||dotrackposition
+|Track source (angle/offset/name)||dotracksource
+|Track wobble (wobble/name)||dotrackwobble
+|Move telescope (zd/az)||domovetelescope
+|Park telescope||dodrivepark
+||
+|Toggle drive||dodrivetoggle
+|Unlock drive||dodriveunlock
+|Stop movement||dodrivestop
+||
+|Reset error||dodrivereset

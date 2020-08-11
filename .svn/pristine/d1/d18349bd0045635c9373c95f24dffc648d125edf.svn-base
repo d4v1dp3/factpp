@@ -1,0 +1,50 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Data taking and tracking script for Crab
+# ==========================================================================
+
+# call it by: .x ScriptsForDimCtrl/TakeCrab.dim
+
+# ----------------------------------------------------
+>
+> ======================================
+> Data taking and tracking script for
+> Crab
+> ======================================
+> starting up...
+>
+
+# changing tracking to Crab Wobble 1
+.x ScriptsForDimCtrl/ServiceScripts/TrackCrabWobble1.dim
+
+# Wait for drivectrl to reply that its tracking the given source
+.x ScriptsForDimCtrl/ServiceScripts/WaitForTracking.dim
+
+# starting data taking of Crab Wobble 1
+.x ScriptsForDimCtrl/DataTaking1.dim
+
+# --------------------------------------
+# Label for processing only Wobble position 2
+# call like this .x ScriptsForDimCtrl/TakeCrab.dim:2
+:2
+# --------------------------------------
+
+# changing tracking to Crab Wobble 2
+.x ScriptsForDimCtrl/ServiceScripts/TrackCrabWobble2.dim
+
+# Wait for drivectrl to reply that its tracking the given source
+.x ScriptsForDimCtrl/ServiceScripts/WaitForTracking.dim
+
+# data taking to Crab Wobble 2
+.x ScriptsForDimCtrl/DataTaking2.dim
+
+# Stop tracking
+.x ScriptsForDimCtrl/ServiceScripts/StopTracking.dim
+
+> ======================================
+> Data taking and tracking script for
+> Crab --> FINISHED
+> ======================================
+>
+

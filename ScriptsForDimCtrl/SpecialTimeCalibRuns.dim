@@ -1,0 +1,73 @@
+#!dimctrl --exec
+
+# Move Telescope to Wobble Position 1
+.! echo `date -u`  "Data Taking script for Special Time Calibration Runs starting up... " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo
+FEEDBACK/ENABLE_OUTPUT 1
+
+# Making sure bias is off
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.s BIAS_CONTROL 7
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.w 1500
+MCP/START -1 500 drs-time-upshifted
+.! echo `date -u`  "taking time cal 2GHz + 0ps || 500evts..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+MCP/START -1 500 drs-time-delay0.5
+.! echo `date -u`  "taking time cal 2GHz + 550ps || 500evts..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.w 1500
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+MCP/START -1 500 drs-time-delay1.0
+.! echo `date -u`  "taking time cal 2GHz + 1000ps || 500evts..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.w 1500
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+MCP/START -1 500 drs-time-delay1.5
+.! echo `date -u`  "taking time cal 2GHz + 1450ps || 500evts..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.w 1500
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+MCP/START -1 500 drs-time-delay2.0
+.! echo `date -u`  "taking time cal 2GHz + 2050ps || 500evts..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+FTM_CONTROL/STOP_TRIGGER
+.w 500
+FAD_CONTROL/CLOSE_OPEN_FILES
+FAD_CONTROL/ENABLE_DRS 0
+.w 1500
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u` "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u` "This is the end of Data Taking of Crab Wobble 1" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+

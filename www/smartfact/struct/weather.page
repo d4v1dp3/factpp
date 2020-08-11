@@ -1,0 +1,13 @@
+Weather
+|Sun|$0|sun
+|Moon|$0|moon
+|Temperature|$0&deg;C|temp
+|Dew point|$0&deg;C|dew
+|Humidity|$0%|hum
+|Pressure|$0 hPa|press
+|Wind speed|$0 km/h|wind
+|Wind gusts|$0 km/h|gusts
+|Wind direction|$0
+|Dust (TNG)|$0 &micro;g/m&sup3; [$1]|tngdust
+|Dust (GTC)|$0 &micro;g/m&sup3; [$1]|gtcdust
+

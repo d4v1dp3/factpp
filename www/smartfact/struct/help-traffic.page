@@ -1,0 +1,36 @@
+Network traffic
+|
+This interface is optimized for slow network connection and low network
+traffic. It is not advisable to reload the pages manually because you
+would just reload the JavaScript. The traffic should be <B>less than
+1kB/s</B> and hence suitable also for mobile connections. The layout is
+optimized for small windows and mobile phones. 
+
+The data displayed is refreshed once every three seconds, <I>i.e.</I>
+the file is reloaded from the server. The graphics display is refreshed
+once every five seconds. A new refresh is only started if the old one
+has been finished, either successfully for with an error or timeout,
+<I>i.e.</I> that slow or faulty network connection can significanly
+increase the refresh time. Whenever a refresh was performed, the color
+of the dots around the title is changed (one for the data and one for
+the graphics) to indicate that the JavaScript is still running and
+requesting data from the server. Also the time stamp at the footer is
+updated. The time-stamp of the retrieved data is displayed at the top.
+If no updated could be performed within sixty seconds or the data is
+older than sixty seconds the time stamp is displayed in red. If the
+time-stamp of the graphics is older than sixty seconds the graphics is
+grayed.
+
+In case of errors or broken connections, the time interval for
+retrieval is  increased to ten seconds, and decreased again if valid
+data was received.
+
+The timer is not newly started if a new page is loaded, hence, it might
+take a few seconds before the values will be displayed. 
+
+The typical size of a camera display is about 350 bytes, the typical
+size of the ascii data is about 100 bytes. Adding the HTML header
+which is in the order of 200 bytes, this yields an average transmission
+rate of aprroximately 200 bytes per second. This is less than one
+mega-byte in one hour, plus the data loaded for each page switch.
+|

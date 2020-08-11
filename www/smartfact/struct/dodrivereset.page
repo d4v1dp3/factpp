@@ -1,0 +1,2 @@
+*Reset drive error|doDriveReset
+control-drive|Allows to reset an error in case of limits exceptions.|

@@ -1,0 +1,6 @@
+Trigger
+|Thresholds||thresholds
+fact|Current trigger rate|$0 Hz
+|Board rates (min/med/max)|$0 Hz / $1 Hz / $2 Hz|boardrates
+|Patch rates (min/med/max)|$0 Hz / $1 Hz / $2 Hz|patchrates
+|hist=hist-ftmcontrol-triggerrate.bin/ Hz|

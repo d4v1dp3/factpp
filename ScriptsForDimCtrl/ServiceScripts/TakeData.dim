@@ -1,0 +1,40 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Script for taking a Data Set (1x Pedestal On, 1x LPext, 4x5min DataRun)
+# ==========================================================================
+
+>-
+
+# take a Pedestal run
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakePedestalOnRun.dim
+
+# take a ExtLP run
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeExtLpRun.dim
+
+#Data Taking with Full Trigger Area (4x5min)
+
+# taking Run 1/4
+> taking data run 1/4
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeDataRun.dim
+
+# taking Run 2/4
+> taking data run 2/4
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeDataRun.dim
+
+# taking Run 3/4
+> taking data run 3/4
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeDataRun.dim
+
+# taking Run 4/4
+> taking data run 4/4
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+.x ScriptsForDimCtrl/ServiceScripts/TakeDataRun.dim
+
+
+>-

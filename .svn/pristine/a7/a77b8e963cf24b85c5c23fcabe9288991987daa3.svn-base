@@ -1,0 +1,32 @@
+Introduction
+|
+The idea of SmartFACT++ is simple. A backend (<I>smartfact</I>) updates some
+data-files continously which can then be retrieved from a web-server
+and the data is displayed in your browser. To keep the network traffic
+low the data is not encapsulated in html, but transmitted <I>as is</I>.
+A JavaScript, running client side, <I>i.e.</I> on the machine running
+the browser is then creating the html around it dynamically which is then
+displayed by the browser. The backend writing the data-files can be basically
+everything. In case of FACT it is a program called <I>smartfact</I> which
+subscribes to all dim-services in the dim-network which are needed.
+Whenever a service is updated, the corresponding files are also updated.
+The disadvantage is that it is difficult to mix information which is 
+not updated together in a single file and display it on a single page.
+This, <I>e.g.</I>, means that a file which is only updated every two 
+hours (because new information is only available every two hours) cannot
+reasonably store information which can change every minute, <I>e.g.</I>
+general warnings. Every page is restricted to reload a single file, to 
+keep network traffic low. A simple solution would be a php which concatenates 
+information before the information is transfered, but this is (not yet?)
+available. Consequently, all pages which are not updated frequently or
+are guranteed to be updated frequently will not show fats updateing
+information as warning. Some pages, <I>e.g.</I>, the main page are
+updated once every seconcd or few seconds rather than updated
+event-driven by the reception of a new service. These pages will then
+show informations like the current warning status of the system.
+
+The page description is reloaded whenver a page has been clicked to
+avoid a lot of network traffic at startup. The disadvantage is a little
+network traffic (in the order of a few hundred bytes) whenever a page
+is changed.
+|

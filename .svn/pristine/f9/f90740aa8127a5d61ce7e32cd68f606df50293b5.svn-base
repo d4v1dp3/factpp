@@ -1,0 +1,60 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# check feedback state before switching BIAS ON and ramping up to nominal Voltage
+# ==========================================================================
+
+> checking feedback state
+.s FEEDBACK 12 10000 60 # Current Control?
+.j 61
+
+:60
+> ===================================================
+>  feedback is not in state "CurrentControl"
+>
+>  OPERATOR: 
+>  goto feedback console and check the state of 
+>  feedback by typing [st] to find out what the
+>  current state means and maybe needs to be done
+>
+>  this script will wait for state "CurrentControl"
+> ===================================================
+.s FEEDBACK 12 # Current Control?
+
+:61
+> ... Current/Temp control active and voltage output enabled
+
+> switching on bias ...
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+
+> checking biasctrl state
+.s BIAS_CONTROL 9 10000 70 # Voltage ON
+.j 71
+
+:70
+> ===================================================
+>  switching on bias not successfull
+>  biasctrl is not in state "VoltageOn"
+>
+>  OPERATOR:
+>  goto biasctrl console and check the state of
+>  biasctrl by typing [st] to find out what the
+>  current state means and maybe needs to be done
+> 
+>  this script will wait for state "VoltageOn"
+> ===================================================
+.s BIAS_CONTROL 9 # Voltage ON
+
+:71
+> ...set 1 DAC
+
+.s BIAS_CONTROL 5 # Ramping
+> ...ramping
+.s BIAS_CONTROL 9 # Voltage ON
+> ...bias ON
+
+
+# here one should wait 30..45sec according to TB
+> bias is on, and feedback-program is working, but we wait 45sec for the current readings...
+.w 45000
+> ... done

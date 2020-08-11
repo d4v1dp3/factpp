@@ -1,0 +1,16 @@
+FACT
+|<H4>General help about SmartFACT++</h4>||help-main
+||
+|System status||help-fact-status
+|Drive||help-fact-drive
+|Relative camera temperature||help-fact-temp
+|Humidity / Wind||help-fact-weather
+|Trigger rate||help-fact-rate
+|G-APD (med/max)||help-fact-bias
+|<h4>Event display</h4>
+The camera display shows one of the last events sent by the fadctrl. 
+To avoid biases in the display by the time marker channels, they
+are replaced with the closest neighbor from the same patch.
+The extracted value corresponds
+to the maximum entry found in the region-of-interest.
+|

@@ -1,0 +1,6 @@
+Ratescan
+status|Median board threshold|$0|
+status|Median patch threshold|$0|
+status|Camera rate|$0 Hz
+|Max board rate|$0 Hz|ratescan-board
+|hist=hist-ratescan.bin/e|

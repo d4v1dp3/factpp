@@ -1,0 +1,54 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Reset Crate
+# ==========================================================================
+# Script for Reset of a crate
+
+# call it by: .x ScriptsForDimCtrl/ResetCrate.dim C=<nr_of_board_to_reset>
+
+# ----------------------------------------------------
+
+> ======================================
+> Crate-Reset for crate ${C}
+> ======================================
+>
+> ...resetting MCP
+MCP/RESET
+.w 5000
+> ...diconnecting FAD boards of crate ${C}
+.x ScriptsForDimCtrl/ServiceScripts/FadDisonnectCrate.dim:${C}
+.w 2000
+
+> ...disconnecting All FTUs
+FTM_CONTROL/ENABLE_FTU -1 no
+.w 2000
+
+> ...checking state of FTM_Control
+> ...waiting for state 3: Idle
+.s FTM_CONTROL 3 2000 60
+.j 61
+
+# ---------------------------------------------------
+: 60
+> ...stopping trigger
+FTM_CONTROL/STOP_TRIGGER
+.s FTM_CONTROL 3
+# ---------------------------------------------------
+
+: 61
+> ...resetting crate
+FTM_CONTROL/RESET_CRATE ${C}
+.w 2000
+
+> ...connecting All FTUs
+FTM_CONTROL/ENABLE_FTU -1 yes
+.w 4000
+> ...pinging FTUs
+FTM_CONTROL/PING
+
+> ...connecting FAD boards of crate ${C}
+.x ScriptsForDimCtrl/ServiceScripts/FadConnectCrate.dim:${C}
+> ======================================
+> Crate-Reset for crate ${C} finished
+> ======================================

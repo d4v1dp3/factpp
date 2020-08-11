@@ -1,0 +1,6 @@
+*Toggle drive|doDriveToggle
+|Status page||status
+control-drive|Execute this to turn the drive on or off. Check its status
+from the status page. Look at Power control. SystemOn means everything
+is switched on, DriveOff, everything except the drive is truned on,
+SystemOff, everything off.|

@@ -1,0 +1,19 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# changing tracking to "Mrk 421" Wobble 2
+# ==========================================================================
+
+>
+> moving telescope to wobble position 2
+> ...waiting for DRIVE_CONTROL
+>    to be in state 6: Armed
+
+DRIVE_CONTROL/STOP
+.s DRIVE_CONTROL 6
+> ...DRIVE: ARMED
+.w 5000
+
+DRIVE_CONTROL/TRACK_SOURCE 0.6 -90 "Mrk 421"
+>...sent tracking command for Mrk 421 Wobble 2
+> COMMAND: DRIVE_CONTROL/TRACK_SOURCE 0.6 -90 "Mrk 421"

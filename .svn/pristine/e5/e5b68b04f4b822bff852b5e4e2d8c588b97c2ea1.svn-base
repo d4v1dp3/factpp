@@ -1,0 +1,18 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Wait for drivectrl to reply that its tracking the given source
+# ==========================================================================
+
+# DRIVE: Moving
+> ...waiting for DRIVE_CONTROL
+>    to be in state 7: Moving
+.s DRIVE_CONTROL 7
+> ...moving
+
+# DRIVE: TRACKING
+> ...waiting for DRIVE_CONTROL
+>    to be in state 9: OnTrack
+.s DRIVE_CONTROL 
+> ...tracking requested wobble position
+

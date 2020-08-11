@@ -1,0 +1,14 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# stop drivectrl tracking the current source
+# ==========================================================================
+
+>
+> stopping tracking of current wobble position
+DRIVE_CONTROL/STOP
+> ...DRIVE: tracking stopped
+
+.s DRIVE_CONTROL 6
+> ...DRIVE: Armed
+> ...tracking stopped

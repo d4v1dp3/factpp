@@ -1,0 +1,26 @@
+FACT
+|<h4>G-APD (med/max)</h4>
+Here the status of the bias system is summarized.
+
+The backround colors have the following meaning:
+<ul class='help'>
+<li>DNS online, MCP taking data, FAD taking data</li>
+<li>Bias voltage switched on and median current above 60&micro;A or
+maximum current (excluding faulty pixels) above 80&micro;A</li>
+<li>Bias voltage switched on and median current above 70&micro;A or
+maximum current (excluding faulty pixels) above 90&micro;A or any patch
+in OverCurrent or MCP not Idle and bias voltage is neither well defined
+switched on (VoltageOn) nor well defined off (VoltageOff).</li>
+<li>Bias neither ramping, nor in OverCurrent, nor in the well defined
+voltage on or off state.</li>
+<li>Bias crate is currently being calibrated</li>
+</ul>
+
+If the bias crate is currently calibrated asterix' are displayed, otherwise
+median pixel current and the maximum pixel current. The maximum excludes
+the crazy pixels. If a channel is on OverCurrent <I>(OC)</I> is appended.
+If the bias crate has not yet been calibrated the maximum current is
+replaced by a dash. If the bias current have been calibarted 
+already, also the total power consumed by the G-APDs
+is displayed otherwise the median applied voltage.
+|

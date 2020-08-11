@@ -1,0 +1,6 @@
+Board rates
+trigger|Min. board rate|$0 Hz|
+trigger|Med. board rate|$0 Hz|
+trigger|Avg. board rate|$0 Hz|
+trigger|Max. board rate|$0 Hz|
+|camera=cam-ftmcontrol-boardrates.bin/ Hz|

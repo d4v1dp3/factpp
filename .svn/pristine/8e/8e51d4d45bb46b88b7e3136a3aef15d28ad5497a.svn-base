@@ -1,0 +1,6 @@
+*Unlock drive|doDriveUnlock
+control-drive| After sun-rise the drive is locked and will reject all movement
+commands. To unlock the drive press the '&gt;' button at the bottom
+of the screen. Be aware that there is no way to re-lock the drive 
+and during day-time you risk severe harm. Only do that if you exactly
+know what you do!|

@@ -1,0 +1,44 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# bring Feedback to state CurrentContro Idle and switch on Bias
+# ==========================================================================
+
+> switching on current controll feedback
+FEEDBACK/STOP
+
+> ... starting current control feedback 
+FEEDBACK/START_CURRENT_CONTROL 0.0
+FEEDBACK/ENABLE_OUTPUT yes
+
+# the feedback should be in state 'CurrentCtrlIdle'(9) now since 30.05.12
+> ...waiting for FEEDBACK to be in state 9: CurrentCtrlIdle
+.s FEEDBACK 9
+> ... done, feedback running
+>
+> switching bias on, sending one DAC globally
+
+# now we give the feedback a hint, that it may ramp ...
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+# after this command the bias_ctrl should be in state 'VoltageOn'(9) after a second or so
+
+> ...waiting for BIAS to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+> ...1 DAC globally set
+
+# then usually it takes some time until the feedback has enough information to really start controlling the voltage
+# when the feedback actually kicks in, the bias is first in state 'Ramping'(5) for some seconds and finally in 'VoltageOn'(9)
+# again
+
+> ...waiting for BIAS to be in state 5: Ramping
+.s BIAS_CONTROL 5
+> ...ramping to nominal voltage
+
+> ...waiting for BIAS to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+> ...bias on
+
+# here we should wait 45 sec in order for the current control to get enough current readings and temp readings to stabilize..
+> waiting 45sec for the current control to stabilize...
+.w 45000
+> ... done, bias on

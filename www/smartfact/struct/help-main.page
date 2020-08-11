@@ -1,0 +1,16 @@
+SmartFACT++
+|<H4>General help</H4>||
+|The basic idea - how does it work?||help-introduction
+|Page layout (displayed elements)||help-layout
+|The camera display||help-camera
+|The histogram display||help-histogram
+|Network traffic and refresh||help-traffic
+|URL options||help-url
+|Sounds||help-sounds
+|File syntax||help-syntax
+||
+||
+#|<h4>Help for main page</h4>||help-main
+|<H4>About</H4>||help-about
+||
+|Please report bugs or problems to <A href="mailto:thomas.bretz@epfl.ch">Thomas Bretz</A>|

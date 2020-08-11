@@ -1,0 +1,39 @@
+#!/bin/bash
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_title Agilent current
+graph_vlabel current
+graph_category environment
+agilent_cur1.label Camera current
+agilent_cur2.label Interlock current
+agilent_cur3.label Bias current
+EOM
+        exit 0;;
+esac
+
+DATA=`echo -e -n "meas:curr?\n" | nc 10.0.100.220 5025`
+RC=$?
+#echo $RC $DATA
+DATA=`printf %.3f ${DATA}`
+if [ "$RC" == "0" -a $DATA != "0.000" ] ; then
+   echo agilent_cur1.value $DATA
+fi
+
+DATA=`echo -e -n "meas:curr?\n" | nc 10.0.100.224 5025`
+RC=$?
+#echo $RC $DATA
+DATA=`printf %.3f ${DATA}`
+if [ "$RC" == "0" -a $DATA != "0.000" ] ; then
+   echo agilent_cur2.value $DATA
+fi
+
+DATA=`echo -e -n "meas:curr?\n" | nc 10.0.100.222 5025`
+RC=$?
+#echo $RC $DATA
+DATA=`printf %.3f ${DATA}`
+if [ "$RC" == "0" -a $DATA != "0.000" ] ; then
+   echo agilent_cur3.value $DATA
+fi
+

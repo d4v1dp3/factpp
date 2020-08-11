@@ -1,0 +1,112 @@
+#!dimctrl --exec
+
+>
+> -----------
+> script for DRS-Calibration before Data taking
+> starting up...
+> -----------
+>
+
+# enable feedback output
+FEEDBACK/ENABLE_OUTPUT 1
+
+# Making sure bias is off, before the DRS calibration starts
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+> ...ramping Voltage down
+>
+> ...waiting for BIAS to be in state 7: Voltage Off
+.s BIAS_CONTROL 7       # Voltage Off
+
+# starting the DRS calibration
+FAD_CONTROL/START_DRS_CALIBRATION
+> ...BIAS voltage is switched off
+>
+
+# taking first DRS:Pedestal with 1000 Events and ROI 1024
+> taking DRS:Pedestal 1000 ...
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+MCP/START -1 1000 drs-pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking DRS:Gain with 1000 Events and ROI 1024
+> taking DRS:Gain 1000 ...
+MCP/START -1 1000 drs-gain
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking DRS:Pedestal 1000 Events and ROI 1024
+> taking DRS:Pedestal 1000 ...
+MCP/START -1 1000 drs-pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking again a DRS:Pedestal with 1000 Events and ROI 1024 for a crosscheck of calculated calibrations constants
+> taking crosscheck DRS:Pedestal 1000 ...
+FAD_CONTROL/SET_FILE_FORMAT 2
+MCP/START -1 1000 drs-pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking DRS:Time with 1000 Events and ROI 1024
+> taking DRS:Time 1000 ...
+MCP/START -1 1000 drs-time
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking DRS:Time upshifted 1000 Events and ROI 1024
+> taking DRS:Time upshifted 1000 ...
+MCP/START -1 1000 drs-time-upshifted
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking a Pedestal with 1000 Events and ROI 300 for secondary baseline...
+> taking Pedestal 1000 for secondary baseline...
+FAD_CONTROL/RESET_SECONDARY_DRS_BASELINE
+MCP/START -1 1000 pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+>
+
+# taking crosscheck Pedestal 1000 Events and ROI 300
+> taking crosscheck Pedestal 1000 ...
+FAD_CONTROL/SET_FILE_FORMAT 2
+MCP/START -1 1000 pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8        # Writing Data
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4        # Connected
+> ... done
+
+> ----------------------------------------------------
+> This is the end of the
+> DRS-Calibration before Data taking
+> ----------------------------------------------------

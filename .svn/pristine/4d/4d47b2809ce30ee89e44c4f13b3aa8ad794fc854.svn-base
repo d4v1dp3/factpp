@@ -1,0 +1,8 @@
+*Track Position|doTrackSource
+control-drive|To move the telescope of the given source and wobble position
+press the '&gt;' button at the bottom of the screen.|
+|input=Wobble angle (0-360) [deg]/wobble/|
+|input=Wobble offset (&gt;&#61;0) [deg]/offset/0.6/|
+|select=Source name/source/Crab/Mrk 421/Mrk 501/1ES 1218+304/1ES 1959+650/1ES 2344+51.4/PKS 2155-304/H 1426+428/Dark Patch 3|
+||
+|Stop telescope||dodrivestop

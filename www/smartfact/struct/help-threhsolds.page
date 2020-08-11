@@ -1,0 +1,10 @@
+Thresholds
+|
+Numbers are given for the median board (N/4) and patch (discriminator)
+threshold. The graphics shows a history of the minimum allowed threshold
+determined by the rate control before the start of each run. Whenever 
+this calibration is done, <i>i.e.</i> the minimum threshold during
+data-taking is calibrated before each run, the resulting value is 
+distributed. Under normal circumstances one point in the grahics
+will therefore correspond to one data-taking run.
+|

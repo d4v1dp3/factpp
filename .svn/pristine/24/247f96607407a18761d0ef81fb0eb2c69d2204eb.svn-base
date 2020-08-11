@@ -1,0 +1,5 @@
+Patch thresholds
+thresholds|Min. patch threshold|$0|
+thresholds|Med. patch threshold|$0|
+thresholds|Max. patch threshold|$0|
+|camera=cam-ftmcontrol-thresholds-patch.bin|

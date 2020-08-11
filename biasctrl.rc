@@ -1,0 +1,3 @@
+database=readpo:readc0nf1g@database/programoptions
+console=2
+quiet=yes

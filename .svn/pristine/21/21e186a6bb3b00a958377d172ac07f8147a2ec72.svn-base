@@ -1,0 +1,17 @@
+#!dimctrl --exec
+
+> ----------------------------------------------------
+> LP_rate_test.dim starting up.
+> ----------------------------------------------------
+
+.x ScriptsForDimCtrl/ServiceScripts/TakeDrsCalibration.dim
+
+.x ScriptsForDimCtrl/ServiceScripts/SwitchOnBias.dim
+
+.x ScriptsForDimCtrl/ServiceScripts/TakeExtLpRun.dim
+
+> ----------------------------------------------------
+> LP_rate_test.dim finished
+> ----------------------------------------------------
+>
+

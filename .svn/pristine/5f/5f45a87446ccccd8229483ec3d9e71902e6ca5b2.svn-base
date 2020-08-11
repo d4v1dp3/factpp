@@ -1,0 +1,30 @@
+Tracking
+|
+When the telescope is tracking (and only during that), it propagates
+some tracking related information through the dim-network. This page
+shows the values of the latest received report.
+
+The control deviation is the deviation measured between the shaft-encoder
+position at the telescope axis and the command position by the controller.
+Theoretically, real mispointing could be larger due to additional
+bending of the structure.
+
+If a dedicated source is tracked, a source name is displayed. If
+the moon is above the horizon, the distance to the moon is displayed.
+
+The colors represent
+<ul class='help'>
+<li>No moon light is directly hitting the G-APDs</li>
+<li>The distance is very close to the direct or indirect field-of-view of the cones.</li>
+<li>The moon is within th efield-of-view. This condition should be avoided as much as possible.</li>
+</ul>
+
+<i>Note that the color scales are not well motivated as of today. Anybody
+is invited to investigate this issue in more details.</i>
+|
+|<h4>Graphics</h4>
+The graphics display the history of the control deviation. Note that it
+is only updated during tracking and the time axis is just simply binned,
+<I>i.e.</I> that one point represents one service update and they need
+not to be equidistant in time.
+|

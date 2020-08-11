@@ -1,0 +1,4 @@
+Thresholds
+|Med. board threshold|$0|thresholds-board
+|Med. patch threshold|$0|thresholds-patch
+|hist=hist-ratecontrol-threshold.bin|

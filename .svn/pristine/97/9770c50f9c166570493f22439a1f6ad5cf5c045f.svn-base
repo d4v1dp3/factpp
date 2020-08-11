@@ -1,0 +1,9 @@
+GPS status
+status|Quality of service|$0|
+status|Satellites in FoV|$0|
+status|GPS Time|$0|
+status|Latitude|$0&deg;|
+status|Longitude|$0&deg;|
+status|Height|$0m|
+status|Hor. dil. of prec.|$0m|
+status|Geo. separation|$0m|

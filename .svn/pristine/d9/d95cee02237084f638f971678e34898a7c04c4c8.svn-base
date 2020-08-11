@@ -1,0 +1,8 @@
+Trigger
+|
+<h4>Current trigger rate</h4>
+The current total camera trigger rate as received by the ftmctrl.
+
+<h4>Graphics</h4>
+The graphics shows a history of the total camera trigger rate.
+|

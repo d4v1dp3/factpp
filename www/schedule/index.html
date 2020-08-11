@@ -1,0 +1,152 @@
+<!DOCTYLE HTML>
+<html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+   <title>FACT Scheduling</title>
+   <meta name="keywords" content="" />
+   <meta name="description" content="" />
+
+   <script src="jquery-2.1.0.min.js"></script>
+   <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.js"></script>
+
+   <script src="JSCal2-1.8/src/js/jscal2.js"></script>
+   <script src="JSCal2-1.8/src/js/lang/en.js"></script>
+
+   <script src="index.js"></script>
+
+   <link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+   <link rel="stylesheet" href="index.css" media="screen" />
+
+   <link rel="stylesheet" href="JSCal2-1.8/src/css/jscal2.css" />
+   <link rel="stylesheet" href="JSCal2-1.8/src/css/border-radius.css" />
+   <link rel="stylesheet" href="JSCal2-1.8/src/css/steel/steel.css" />
+</head>
+
+<body style="background-color: #000;">
+<div id="wait" style="background:rgba(0,0,0,0.75) url('images/helium-anim-trans.gif') no-repeat center center;z-index:400;position:fixed;top:0px;left:0px;width:100%;height:100%;text-align:center;vertical-align:middle;"></div>
+<div id="bg2"></div>
+<div id="wrapper1">
+   <div id="header2">
+      <ul>
+         <li><a href="http://www.fact-project.org">FACT <li2>OBSERVATION SCHEDULING</li2></a></li>
+      </ul>
+      <div class="clear"></div>
+   </div>	
+   <div id="content_bg_top"></div>
+   <div id="content_box">
+      <div id="column_box">
+         <div id="column1">
+	    <div id="calendar">
+      	       <div id="cont"></div>
+            </div>
+	 </div>
+	 <div id="column3"></div>
+         <div class="clear"></div>
+      </div>
+      <div style="width:100%;">
+         <table width="100%">
+            <tr>
+               <td style="font-weight:bold;">TIME:&nbsp;&nbsp;</td>
+               <td id="clock" style="white-space:nowrap; font-size:16px; font-weight:bold; color:#FFFF00"></td>
+               <td style="text-align:right;width:100%;">
+                  <input type="button" class="button"  id="load" value="Load Night"  title="Click to load given night"/>
+                  <input type="date"                   id="loaddate"                 title="Date to load a schedule from."/>&nbsp;&nbsp;
+                  <input type="button" class="button"  id="save" value="SAVE"        title="Click to save"/>
+                  <input type="date"   disabled="true" readonly="true" id="savedate" title="Date to which the schedule is saved."/>&nbsp;&nbsp;
+                  <input type="button" class="button"  id="help" value="HELP"        title="Click to view help" align="left"/>
+               </td>
+            </tr>
+         </table>
+      </div>
+      <div style="border:2px solid white; width:100%;">
+         <table width="100%" id="TableHolder" >
+	    <tr>
+	       <td style="border:1px solid white; color:palegreen; font-size:14px; text-align:center; width:1%; font-weight:bold;" align="center"><div id="time" style="white-space:nowrap;"></div></td>
+	       <td style="border:1px solid white; color:palegreen; font-size:14px; text-align:center; width:1%;">Measurement</td>
+               <td style="border:1px solid white; color:palegreen; font-size:14px; text-align:center; width:1%;">Source</td>
+	       <td style="border:1px solid white; color:palegreen; font-size:14px; text-align:center; ">Value</td>
+	    </tr>
+	 </table>
+      </div>
+	
+      <div id="footer_bot">
+         <p>&copy; 2014 FACT Project, Implemented by Western Mindanao State University (<strong><a href="http://www.wmsu.edu.ph">WMSU</a>, Philippines</strong>)</p>
+      </div>
+   </div>
+   <div id="debug"></div>
+</div>
+<div id="Overlay" name="Overlay" class="overlay">
+    <div style="padding-top:25px;padding-bottom:15px;padding-left:25%;padding-right:25%;">
+    <div style="background-color:black;color:white;padding:15px;">
+    <div style="color:white;small-caps;"><span id="close" class="close">X</span> To close click here or press Esc.</div>
+    <BR>
+    <!--<hr><br>-->
+    <H1>HELP</H1>
+    <div style="font-size:17px;padding-top:5px;font-family:'Times New Roman';text-align:justify;">
+    
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Loading a schedule</H3>
+    To load a schedule click on the corresponding date in the calendar. If
+    you click on <B>SAVE</B> the schedule will be saved to the date shown in the box close to the
+    <B>SAVE</B> button. It is always identical with the last calender date you clicked.
+    <p>
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Remarks about saving</H3>
+    If saving fails, an error message is displayed. If it was supposed to be successful,
+    the schedule of the selected date is newly loaded and displayed.
+    <p>
+    
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Replacing a schedule</H3>
+    You can overwrite a schedule with the schedule from a different date by entering the
+    date in the box close to <B>Load Night</B> and either pressing Enter or the <B>Load Night</B>
+    button.
+    <p>
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Disabled entries</H3>
+    Entries which are at the time the schedule is loaded already in the past, are 
+    disabled and cannot be changed. This is because they might already have been processed
+    by the scheduler and are currently executed.
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Color of times</H3>
+    For the current night, entries which are before the current time are
+    displayed in red, entries which are later, are displayed in green. Colors are updated
+    interactively.
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Scheduling</H3>
+    Note that the last entry display in red will most probably be the first one
+    executed by the scheduler. If the scheduler (Main.js) is running, it will just replace
+    the next entry in the schedule and be executed completely. If the scheduler (Main.js) is not
+    running, still the last red entry will be the first one to be executed, but since
+    it is the first one executed by the script, the script assumes that it failed and
+    was restarted. Therefore, only the last of its observations (usually <I>data</I>)
+    is executed.
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Suspend</H3>
+    If a <I>suspend</I> is scheduled, all further observations are discarded. The
+    <I>suspend</I> itself is just a <I>sleep</I>. If very soon, a new observation
+    will be started, it is best to schedule the <I>suspend</I> before it, otherwise
+    the observation might get started before the <I>suspend</I> is executed. Note
+    that a suspend does <b>not</b> interrupt the current observation, but will work
+    as a normal entry, i.e. the previous measurement (usually a <i>data</i> run) will
+    be finished before the suspend is executed.
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Resume</H3>
+    If a <I>resume</I> is scheduled, it has the same effect as if the preceeding
+    <i>suspend</i> was removed. That effectively means that the last observation
+    which was scheduled before the <i>resume</i> will be executed as it if just became
+    valid. Consequently, if it is scheduled close to the change of observation, 
+    it makes sense to schedule it after this observation, to avoid that the previous
+    observation becomes effective.
+
+    <H3 style="font-family:arial;padding-top:20px;padding-bottom:10px;">Options</H3>
+    Options are ecoded as JSON object (search google for details). The meaning of
+    their properties is defined by the task to be executed. The starting and
+    closing brace must be omitted. Note that for a correct JSON object, the property
+    names must be enclosed in double quotation marks ("...").
+    </div>
+    </div>
+    </div>
+</div>
+
+</body>
+
+</html>

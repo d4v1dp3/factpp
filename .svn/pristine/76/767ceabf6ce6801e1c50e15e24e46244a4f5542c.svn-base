@@ -1,0 +1,150 @@
+PAL Library
+
+The Starlink Positional Astronomy Library (PAL) is a C implementation of the
+SLALIB API. It is distributed under the GPL and uses the SOFA library wherever
+possible.
+
+V0.9.7
+
+- Enable light deflection in palAmpqk.
+
+V0.9.5
+
+- Add light deflection to palAmpqk. SLALIB always had it but for some reason
+  the relevant piece of code never got ported to PAL.
+
+V0.9.4
+
+- Add light deflection to palMapqkz (thanks to Scott Daniel)
+- Add test for palMapqk (thanks to Scott Daniel)
+- Correctly disable documentation build when running outside of a Starlink
+  environment.
+
+V0.9.3
+
+- Fix value of small in palFk524. Typo in port from Fortran
+  had removed the "e" in the number. Thanks to @danielsf.
+
+- Add test for palFk524
+
+V0.9.2
+
+Thanks to Github user @nega0 for some BSD build fixes.
+
+More STARCONF_DEFAULT_PREFIX fixes for Scons file and for
+document building.
+
+New configure option: --with-erfa to allow the ERFA
+root location to be specified.
+
+V0.9.1
+
+Now checks for STARCONF_DEFAULT_PREFIX environment variable
+when deciding whether a Starlink environment is present. This
+was more reliable than checking for STARLINK_DIR.
+
+V0.9.0
+
+Add palPcd and palUnpcd
+
+V0.8.0
+
+Add palEcleq
+
+V0.7.0
+
+Add palPolmo.
+
+V0.6.0
+
+New function, palVers, provides API access to the PAL
+version number as a string or integer.
+
+V0.5.1
+
+The configure script was getting confused if run outside of
+Starlink without using --without-starlink. This was because
+$STARLINK is set in the script if it is not set and the
+configure script was assuming $STARLINK would be unset
+outside of a Starlink environment. The configure script
+now keys off $STARLINK_DIR but that may interact badly
+if STARLINK_DIR is set and --without-starlink is used.
+
+An experimental SConstruct build script is now available
+for users of scons.
+
+SUN/267 has been synced up with the associated source files.
+
+palIntin now respects the isblank configure check (as it
+should have done all along).
+
+Minor clean ups of some source prologues.
+
+V0.5.0
+
+Now works with ERFA <https://github.com/liberfa/erfa>.
+The configure script has been modified to first check
+for ERFA and then check for SOFA.
+
+V0.4.0
+
+New routines ported from SLA: palRefv, palAtmdsp
+New routine inherited from SOFA: palRefcoq
+
+Minimum SOFA version now 2013-12-02
+
+palObs: Now includes telescope positions for APEX and NANTEN2
+
+The autotools build scripts now require autoconf version 2.69.
+
+Thanks to Github user @nega0 for some BSD build fixes.
+
+A subset of the routines have been relicensed using LGPL
+to allow them to be included in the AST library. Thanks to
+Patrick Wallace for giving this permission.
+
+A paper on PAL has been published at ADASS:
+  http://adsabs.harvard.edu/abs/2013ASPC..475..307J
+
+V0.3.0
+
+Add refraction code and support palOap and palAop. For closer compatibility
+with SLA for testing purposes the refraction routines internally use
+clones of slaNutc, slaEqeqx, slaGmst and slaGeoc. Once the code has
+been verified further the PAL/SOFA routines will be used instead. Switching
+routines seems to change the results in palTest by about 0.05 arcsec.
+
+V0.2.0
+
+Improve configure script when not in a Starlink build environment. Use
+
+  ./configure --prefix=/path/to/install
+
+when Starlink is not available and add --without-starlink if Starlink
+is present but should not be used.
+
+V0.1.5
+
+Explcitly look for libm rather than relying on SOFA to pull it in.
+
+V0.1.4
+
+Check for isblank() function and fall back if it is missing.
+
+V0.1.3
+
+Improve copysign() detection.
+
+V0.1.2
+
+Check for copysign() c99 function and fall back if it is missing.
+
+V0.1.1
+
+The palDrange function has been modified so that it now returns +PI if
+the supplied angle is +PI (previously, it returned -PI in these cases).
+
+
+V0.1.0
+
+Initial release with sufficient SLALIB API for AST and the Astro::Coords perl module.

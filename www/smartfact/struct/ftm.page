@@ -1,0 +1,10 @@
+FTM settings
+|Trigger interval|$0 ms|
+|Artificial trigger (ped&#58;lpext&#58;lpint)|$0|
+|Trigger (phys/ext1/ext2)|$0|
+|Veto / Time marker|$0|
+|Multiplicity N/40 (phys/cal)|$0|
+|Window (phys/cal)|$0 ns / $1 ns|
+|Delay (trigger/time marker)|$0 ns / $1 ns|
+|Dead time|$0 ns|
+|FTU readout interval|$0 s|ftu

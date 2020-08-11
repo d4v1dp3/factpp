@@ -1,0 +1,12 @@
+Control
+#|Drs Calibration||drscal
+#|Take singel pe data||singlepe
+#|Take data||takedata
+#|Drive controls||drive
+#|Crate reset||docratereset
+|Start data taking (Main.js)||control-main
+|Interrupts||control-irq
+|Drive controls||control-drive
+|Lid controls||control-lid
+|Crate reset||docratereset
+#|Test the dimctrl system||dotest

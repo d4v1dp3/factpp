@@ -1,0 +1,19 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# changing tracking to "Crab" Wobble 1
+# ==========================================================================
+
+>
+> moving telescope to wobble position 1
+> ...waiting for DRIVE_CONTROL
+>    to be in state 6: Armed
+
+DRIVE_CONTROL/STOP
+.s DRIVE_CONTROL 6
+> DRIVE: ARMED
+.w 5000
+
+DRIVE_CONTROL/TRACK_SOURCE 0.6 50 Crab
+>...sent tracking command for Crab Wobble 1
+> COMMAND: DRIVE_CONTROL/TRACK_SOURCE 0.6 50 Crab

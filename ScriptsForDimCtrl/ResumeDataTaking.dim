@@ -1,0 +1,82 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# resume data taking
+# ==========================================================================
+# Script to resume data taking after it had to be aborted
+# during first run of four data runs
+
+# call it by: .x ScriptsForDimCtrl/ResumeDataTaking.dim N=<number of runs>
+# N = 1...4
+
+# ----------------------------------------------------
+
+> ======================================
+> resume taking ${N} data runs after
+> DataTaking was aborted...
+> ======================================
+> OPERATOR:
+> + make sure bias is switched on
+> + make sure feedback is running!!!
+> --------------------------------------
+
+# check if bias is ramped up and if feedback is running
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+
+> ...waiting for FEEDBACK
+>    to be in state 12: CurrentControl
+.s FEEDBACK 12
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+
+> ...bias is on
+> ...feedback-program is working
+> waiting 45sec for the current readings
+> --------------------------------------
+.w 45000
+
+.j ${N}
+
+#Data Taking with Full Trigger Area (4x5min)
+
+:4
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+> taking Data:FullTriggerArea 5min Run
+MCP/START 300 -1 data
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+> ... done
+
+:3
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+> taking Data:FullTriggerArea 5min Run
+MCP/START 300 -1 data
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+> ... done
+
+:2
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+> taking Data:FullTriggerArea 5min Run
+MCP/START 300 -1 data
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+> ... done
+
+:1
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+> taking Data:FullTriggerArea 5min Run
+MCP/START 300 -1 data
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+> ... done
+
+> ======================================
+> resumed data taking finished
+> ======================================
+

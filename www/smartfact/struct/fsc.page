@@ -1,0 +1,6 @@
+Slow control
+fact|Average humidity|$0%
+|Min. relative temp|$0&deg;C|camtemp
+|Avg. relative temp|$0&deg;C|camtemp
+|Max. relative temp|$0&deg;C|camtemp
+|hist=hist-fsccontrol-temperature.bin/&deg;C|

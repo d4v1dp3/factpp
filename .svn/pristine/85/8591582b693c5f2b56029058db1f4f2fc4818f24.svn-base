@@ -1,0 +1,648 @@
+<!DOCTYLE HTML>
+<html>
+<head>
+    <link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/smoothness/jquery-ui-1.10.4.custom.min.css"/>
+    <script src="jquery-2.1.0.min.js"></script>
+    <script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
+    
+    <link rel="stylesheet" href="codemirror-4.1/lib/codemirror.css"/>
+    <!--<link rel="stylesheet" href="codemirror-4.1/theme/myblackboard.css"/>-->
+    <!--<link rel="stylesheet" href="codemirror-4.1/theme/blackboard.css">-->
+    <!--<link rel="stylesheet" href="codemirror-4.1/theme/3024-night.css">-->
+    <link rel="stylesheet" href="codemirror-4.1/addon/display/fullscreen.css"/>
+    <link rel="stylesheet" href="codemirror-4.1/addon/dialog/dialog.css"/>
+    <link rel="stylesheet" href="codemirror-4.1/addon/fold/foldgutter.css"/>
+    <link rel="stylesheet" href="codemirror-4.1/addon/lint/lint.css"/>
+    <script src="codemirror-4.1.min.js"></script>
+    <!--
+    <script src="codemirror-4.1/lib/codemirror.js"></script>
+    <script src="codemirror-4.1/mode/javascript/javascript.js"></script>
+    <script src="codemirror-4.1/addon/selection/active-line.js"></script>
+    <script src="codemirror-4.1/addon/fold/brace-fold.js"></script>
+    <script src="codemirror-4.1/addon/runmode/colorize.js"></script>
+    <script src="codemirror-4.1/addon/fold/comment-fold.js"></script>
+    <script src="codemirror-4.1/addon/dialog/dialog.js"></script>
+    <script src="codemirror-4.1/addon/fold/foldcode.js"></script>
+    <script src="codemirror-4.1/addon/fold/foldgutter.js"></script>
+    <script src="codemirror-4.1/addon/display/fullscreen.js"></script>
+    <script src="codemirror-4.1/addon/hint/javascript-hint.js"></script>
+    <script src="codemirror-4.1/addon/lint/lint.js"></script>
+    <script src="codemirror-4.1/addon/lint/javascript-lint.js"></script>
+    <script src="codemirror-4.1/addon/search/match-highlighter.js"></script>
+    <script src="codemirror-4.1/addon/edit/matchbrackets.js"></script>
+    <script src="codemirror-4.1/addon/runmode/runmode.js"></script>
+    <script src="codemirror-4.1/addon/search/search.js"></script>
+    <script src="codemirror-4.1/addon/search/searchcursor.js"></script>
+    <script src="codemirror-4.1/addon/hint/show-hint.js"></script>
+    -->
+    <script src="flot-0.8.3/jquery.flot.min.js"></script>
+    <script src="flot-0.8.3/jquery.flot.selection.min.js"></script>
+    <script src="flot-0.8.3/jquery.flot.symbol.min.js"></script>
+    <script src="flot-0.8.3/jquery.flot.resize.js"></script>
+    <script src="jshint.js"></script>
+    <script src="index.js"></script>
+
+    <link rel="stylesheet" href="index.css"/>
+</head>
+
+<body>
+
+<div id='tooltip' style="z-index:1000;position:absolute;display:none;border:1px solid #fdd;padding;2px;background-color:#fee;opacity:0.8"></div>
+
+<div class="myaccordion" id="accordion5">
+   <h3><a href="#">Editor 1 (proc)</a></h3>
+   <div id="editorcontainer1fake" style="position:absolute;border:0;opacity:0"></div>
+</div>
+<div id="editorcontainer1" style="z-index:600;">
+   <form action="index.php" method="post" style="margin-bottom:0px">
+      <div id="textcontainer1">
+         <textarea id="editor1" name="editor1" type="textarea">
+return $.data[pixel];
+         </textarea>
+      </div>
+      <div class="ui-widget-content" style="background:#333;color:#eef;border-top-width:0;padding-top:2px;">
+         <input type="submit" value="Save"></input>
+         <input type="file" name="files[]" id="selectfile1"></input><output id="file1"></output>
+      </div>
+    </form>
+</div>
+
+<div class="myaccordion" id="accordion1">
+   <h3><a href="#">Editor 2 (main)</a></h3>
+   <div id="editorcontainer2fake" style="position:absolute;border:0;opacity:0"></div>
+</div>
+<div id="editorcontainer2">
+   <form action="index.php" method="post" style="margin-bottom:0px">
+      <div id="textcontainer2"> 
+         <textarea id="editor2" name="editor2" type="textarea">
+print("This output will go to the virtual Console.\n");
+
+// The four first values of pixel 1
+var arr = [ $.data[1][0], $.data[1][1], $.data[1][2], $.data[1][3] ];
+print("Pixel 1: [ "+arr+" ]\n");
+
+// Get the maximum sample from each pixel
+var rc = [new Array(1440),new Array(1440)];
+for (var p=0; p<$.event.numPix; p++)
+{
+    var max =  0;
+    var idx = -1;
+    for (var s=5; s<$.event.numRoi-60; s++)
+    {
+        // spike suppression
+        var h = ($.data[p][s]-$.data[p][s-1]) + ($.data[p][s]-$.data[p][s+1]);
+
+        if ($.data[p][s]>max && h<20)
+        {
+            max = $.data[p][s];
+            idx = s;
+        }
+    }
+    rc[0][p]=idx<0 ? null : max;
+    rc[1][p]=idx<0 ? null : idx;
+}
+
+return rc;
+         </textarea>
+      </div>
+      <div class="ui-widget-content" style="background:#333;color:white;border-top-width:0;padding-top:2px;">
+         <input type="submit" value="Save"></input>
+         <input type="file" name="files[]" id="selectfile2"></input><output id="file2"></output>
+      </div>
+   </form>
+</div>
+
+<div class="myaccordion" id="accordion" style="margin-bottom:1ex">
+   <h3><a  style="color:red" href="#">Runtime error</a></h3>
+   <div>
+      <pre id="error" style="color:red"></pre>
+   </div>
+   <h3><a href="#">Console</a></h3>
+   <div>
+      <pre style="color:green" id="console"></pre>
+   </div>
+   <h3><a href="#">Run info</a></h3>
+   <div>
+      <pre id="runinfo"></pre>
+   </div>
+   <h3><a href="#">Debug</a></h3>
+   <div id="debug">
+   </div>
+</div>
+
+<div class="ui-widget-content" style="background:#eee;margin-top:-10px">
+   <input id="submit"  type="button" onclick="onSubmit();" value="Submit"></input>
+   <span style="float:right;white-space:nowrap;">
+      <span id="txtmontecarlo" style="color:darkgrey;">MC</span>
+      <input id="montecarlo" style="margin-left:0px;margin-right:5px;" type="checkbox" onclick="onSubmit();" disabled="true"></input>
+      <span id="txtdrsfile">DRS</span>
+      <input id="drsfile" style="margin-left:0px;margin-right:5px;" type="checkbox" onclick="onSubmit();"></input>
+      <span id="txtcalibrated">Cal</span>
+      <input id="calibrated" style="margin-left:0px;margin-right:5px;" type="checkbox" onclick="onSubmit();"></input>
+      Run 
+      <input id="file" style="width:100px"></input>
+   </span>
+   &nbsp;
+   <span style="white-space:nowrap">
+      Evt 
+      <input id="event" style="text-align:right;" type="number" onchange="onEvent();"  value="0" min="0" max="0"    step="1"></input>/<span id="numevents">---</span>
+   </span>
+   &nbsp;
+   <span style="white-space:nowrap">
+      Pix 
+      <input id="pixel" style="text-align:right;width:50px;" type="number" onchange="onPixel();"  value="0" min="0" max="1439" step="1"></input>
+   </span>
+   &nbsp;
+   <span style="white-space:nowrap">
+      CBPX
+      <input id="cbpx-c" style="text-align:right;width:30px;" type="number" onchange="onCBPX();"  value="1" min="0" max="3" step="1"></input>
+      <input id="cbpx-b" style="text-align:right;width:30px;" type="number" onchange="onCBPX();"  value="0" min="0" max="9" step="1"></input>
+      <input id="cbpx-p" style="text-align:right;width:30px;" type="number" onchange="onCBPX();"  value="3" min="0" max="3" step="1"></input>
+      <input id="cbpx-x" style="text-align:right;width:30px;" type="number" onchange="onCBPX();"  value="6" min="0" max="8" step="1"></input>
+      =
+      <input id="cbpx"   style="text-align:right;width:50px;" type="number" onchange="onHW();"  value="393" min="0" max="1439" step="1"></input>
+   </span>
+</div>
+
+<div class="myaccordion" id="accordion2">
+   <h3><a href="#">Camera display</a></h3>
+</div>
+<div id="cameracontainer" class="ui-widget-content">
+   <table width="100%">
+      <colgroup>
+         <col style="width:38.5%;">
+         <col style="width:23%;">
+         <col style="width:38.5%;">
+      </colgroup>
+      <tr>
+         <td>
+            <span style="white-space:nowrap;margin-right:2px;">
+               Min 
+               <input id="cameramin1"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(1);"  value="0" disabled="true"></input>
+               <input id="cameraminon1" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(1);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap">
+               Max 
+               <input id="cameramax1"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(1);"  value="0" disabled="true"></input>
+               <input id="cameramaxon1" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(1);" checked="true"></input>
+            </span>
+         </td>
+         <td style="text-align:center" id="eventinfo">
+         </td>
+         <td style="text-align:right">
+            <span style="white-space:nowrap">
+               Min 
+               <input id="cameramin2"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(2);"  value="0" disabled="true"></input>
+               <input id="cameraminon2" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(2);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap;margin-left:2px;">
+               Max 
+               <input id="cameramax2"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(2);"  value="0" disabled="true"></input>
+               <input id="cameramaxon2" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(2);" checked="true"></input>
+            </span>
+         </td>
+         <td>
+         </td>
+      </tr>
+   </table>
+
+   <table id="table" width="100%" border="0" style="border:0;margin:0;padding:0;">
+      <tr style="margin:0;padding:0;">
+         <td style="margin:0;padding:0;">
+	    <table border="0" style="margin:0;padding:0;">
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="contcamera1"></tr>
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="contcamera3"><canvas id="camera3" width="1" height="1"></canvas></td></tr>
+            </table>
+	 </td>
+	 <td style="margin:0;padding:0;" id="centercamera"><canvas id="camera1" width="1" height="1"></canvas></td>
+	 <td style="margin:0;padding:0;">
+	    <table border="0" style="margin:0;padding:0;">
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="contcamera2"><canvas id="camera2" width="1" height="1"></canvas></td></tr>
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="contcamera4"><canvas id="camera4" width="1" height="1"></canvas></td></tr>
+	    </table>
+	 </td>
+      </tr>
+   </table>
+
+   <table width="100%">
+      <colgroup>
+         <col style="width:38.5%;">
+         <col style="width:23%;">
+         <col style="width:38.5%;">
+      </colgroup>
+      <tr>
+         <td>
+            <span style="white-space:nowrap;margin-right:2px;">
+               Min 
+               <input id="cameramin3"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(3);"  value="0" disabled="true"></input>
+               <input id="cameraminon3" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(3);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap">
+               Max 
+               <input id="cameramax3"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(3);"  value="0" disabled="true"></input>
+               <input id="cameramaxon3" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(3);" checked="true"></input>
+            </span>
+         </td>
+         <td style="text-align:center;">
+            <span style="white-space:nowrap;margin-left:1px;margin-right:1px;"><input id="grid"   type="checkbox" onclick="refreshCameras();" checked="true">Grid</input></span>
+            <span style="white-space:nowrap;margin-left:1px;margin-right:1px;"><input id="marker" type="checkbox" onclick="refreshCameras();" checked="true">Marker</input></span>
+            <span style="white-space:nowrap;margin-left:1px;margin-right:1px;"><input id="image"  type="checkbox" onclick="refreshCameras();">Image</input></span>
+            <!--Pixel value: 
+            <input id="value" type="text" readonly="true"  value="0" style="text-align:right;width:100px"></input>-->
+         </td>
+         <td style="text-align:right">
+            <span style="white-space:nowrap">
+               Min 
+               <input id="cameramin4"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(4);"  value="0" disabled="true"></input>
+               <input id="cameraminon4" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(4);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap;margin-left:2px;">
+               Max
+               <input id="cameramax4"   style="text-align:right;width:100px;" type="number"   onchange="onCameraMinMax(4);"  value="0" disabled="true"></input>
+               <input id="cameramaxon4" style="margin-left:0px;" type="checkbox" onclick="onCameraMinMaxOn(4);" checked="true"></input>
+            </span>
+         </td>
+      </tr>
+   </table>
+</div>
+
+<div class="myaccordion" id="accordion7">
+   <h3><a href="#">Histograms</a></h3>
+</div>
+<div id="histcontainer" class="ui-widget-content">
+   <table width="100%">
+      <colgroup>
+         <col style="width:40%;">
+         <col style="width:20%;">
+         <col style="width:40%;">
+      </colgroup>
+      <tr>
+         <td>
+            <span style="white-space:nowrap;margin-right:2px;">
+               Min
+               <input id="histmin1"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(1);"  value="0" disabled="true"></input>
+               <input id="histminon1" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(1);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap">
+               Max
+               <input id="histmax1"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(1);"  value="0" disabled="true"></input>
+               <input id="histmaxon1" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(1);" checked="true"></input>
+            </span>
+         </td>
+         <td style="text-align:center" id="eventinfo">
+         </td>
+         <td style="text-align:right">
+            <span style="white-space:nowrap">
+               Min
+               <input id="histmin2"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(2);"  value="0" disabled="true"></input>
+               <input id="histminon2" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(2);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap;margin-left:2px;">
+               Max
+               <input id="histmax2"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(2);"  value="0" disabled="true"></input>
+               <input id="histmaxon2" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(2);" checked="true"></input>
+            </span>
+         </td>
+         <td>
+         </td>
+      </tr>
+   </table>
+
+   <table id="table" width="100%" border="0" style="border:0;margin:0;padding:0;">
+      <tr style="margin:0;padding:0;">
+         <td style="margin:0;padding:0;">
+	    <table border="0" style="margin:0;padding:0;">
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="conthist1"></tr>
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="conthist3"><div style="width:1px;height:1px;" id="hist3"></div></td></tr>
+            </table>
+	 </td>
+	 <td style="margin:0;padding:0;" id="centerhist"><div style="width:1px;height:1px;" id="hist1"></div></td>
+	 <td style="margin:0;padding:0;">
+	    <table border="0" style="margin:0;padding:0;">
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="conthist2"><div style="width:1px;height:1px;" id="hist2"></div></td></tr>
+	       <tr style="margin:0;padding:0;"><td style="margin:0;padding:0;" id="conthist4"><div style="width:1px;height:1px;" id="hist4"></div></td></tr>
+	    </table>
+	 </td>
+      </tr>
+   </table>
+
+   <table width="100%">
+      <colgroup>
+         <col style="width:50%;">
+         <col style="width:50%;">
+      </colgroup>
+      <tr>
+         <td>
+            <span style="white-space:nowrap;margin-right:2px;">
+               Min 
+               <input id="histmin3"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(3);"  value="0" disabled="true"></input>
+               <input id="histminon3" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(3);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap">
+               Max 
+               <input id="histmax3"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(3);"  value="0" disabled="true"></input>
+               <input id="histmaxon3" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(3);" checked="true"></input>
+            </span>
+         </td>
+         <td style="text-align:right">
+            <span style="white-space:nowrap">
+               Min
+               <input id="histmin4"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(4);"  value="0" disabled="true"></input>
+               <input id="histminon4" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(4);" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap;margin-left:2px;">
+               Max
+               <input id="histmax4"   style="text-align:right;width:100px;" type="number"   onchange="onHistMinMax(4);"  value="0" disabled="true"></input>
+               <input id="histmaxon4" style="margin-left:0px;" type="checkbox" onclick="onHistMinMaxOn(4);" checked="true"></input>
+            </span>
+         </td>
+      </tr>
+   </table>
+</div>
+
+<div class="myaccordion" id="accordion3">
+   <h3><a href="#">Waveform</a></h3>
+</div>
+<div id="waveformcontainer"  class="ui-widget-content">
+   <div id="waveform" style="width:100%;height:300px;"></div>
+   <table style="width:100%">
+      <colgroup>
+         <col style="width:33%;">
+         <col style="width:66%;">
+      </colgroup>
+      <tr>  
+         <td style="text-align:left;margin-right:2px;">
+            <span style="white-space:nowrap;float:left">
+               Xmin
+               <input id="waveformxmin"   style="width:55px;text-align:right"type="number"   onchange="onWaveformMinMax();"  value="0" disabled="true"></input>
+               <input id="waveformxminon" style="margin-left:0px;" type="checkbox" onclick="onWaveformMinMaxOn();" checked="true"></input>
+      	    </span>
+      	    <span style="white-space:nowrap;float:left">
+               Xmax
+               <input id="waveformxmax"   style="width:55px;text-align:right"type="number"   onchange="onWaveformMinMax();"  value="0" disabled="true"></input>
+               <input id="waveformxmaxon" style="margin-left:0px;" type="checkbox" onclick="onWaveformMinMaxOn();" checked="true"></input>
+      	    </span>
+     	 </td>
+         <td style="text-align:right">
+            <span style="white-space:nowrap;">
+               Ymin
+               <input id="waveformmin"   style="text-align:right"type="number"   onchange="onWaveformMinMax();"  value="0" disabled="true"></input>
+               <input id="waveformminon" style="margin-left:0px;" type="checkbox" onclick="onWaveformMinMaxOn();" checked="true"></input>
+            </span>
+            <span style="white-space:nowrap;margin-left:2px;">
+               Ymax
+               <input id="waveformmax"   style="text-align:right"type="number"   onchange="onWaveformMinMax();"  value="0" disabled="true"></input>
+               <input id="waveformmaxon" style="margin-left:0px;" type="checkbox" onclick="onWaveformMinMaxOn();" checked="true"></input>
+           </span>
+         </td>
+      </tr>
+   </table>
+</div>
+
+<div class="myaccordion" id="accordion6">
+   <h3><a href="#">Additional controls</a></h3>
+</div>
+<div id="ctrlcontainer" class="ui-widget-content">
+   <form id="controls" method="POST" style="margin-bottom:0">
+      <input id="getgeometry" type="button" onclick="onGetGeometry();" value="Get geometry"></input>
+      <input id="getcamera"   type="button" onclick="onGetCameras();" value="Get camera data"></input>
+      <input id="getwaveform" type="button" onclick="onGetWaveforms();" value="Get waveforms"></input>
+      <input id="data" name="data" type="hidden"></input>
+      <input id="name" name="name" type="hidden"></input>
+   </form>
+</div>
+
+<div class="myaccordion" id="accordion4">
+   <h3><a href="#">Help</a></h3>
+</div>
+<div id="helpcontainer" class="ui-widget-content" style="padding-left:40px;padding-right:40px;padding-bottom:40px;">
+<H1>HELP</H1>
+
+<H3>How does it work?</H3>
+When you submit a javascript to the server, it will be executed
+on a sandbox on the server. Before the event is loaded from a file
+and made available within the sandbox. Generally, the sandbox
+can easily be enhanced, e.g. with algorithms available in php.
+This can be done on request. After execution, the result returned
+by the script is then displayed in the camera display.
+
+<H3>Why Javascript?</H3>
+Simply for security reasons. To avoid tranferring the event to the client's
+browser, the script must be executed on the server side. Also Python
+and PHP offer the possibility to execute scripts within a program,
+they do not have any security feature to avoid for exmple access to the
+local disk. The V8 Javascript engine however, is very limited in
+functionality and therefore ideally suited for a sandboxed and
+therefore safe excution on the server. Any other solution is welcome.
+
+<H3>Javascript hints!</H3>
+Please note that in Javascript only basic data typed (number, etc)
+are copied in an assignment. In all other cases, only a reference
+is copied. For example, the following code snippet does not return 2
+as you might expect but 7!
+<pre>
+var arr = [ 0, 1, 2, 3 ];
+var cpy = arr;
+cpy[2] = 7;
+print(arr[2]);
+</pre>
+To avoid that, the global namespace implements a clone function.
+For exmaple, the following code snippet will return the expected output:
+<pre>
+var arr = [ 0, 1, 2, 3 ];
+var cpy = $.clone(arr);
+cpy[2] = 7;
+print(arr[2]);
+</pre>
+
+<H3>Javascript arrays</H3>
+Note that javascript arrays have some very powerful member functions. 
+For a description see for example 
+<A HREF="http://www.tutorialspoint.com/javascript/javascript_arrays_object.htm">here</A>
+or search google for function like <i>map</i> or <i>reduce</i>.
+
+<H3>The global object $</H3>
+
+The environment provides a global object (namesapce) called $ with the following members:
+<table>
+<tr><td>$.file.numEvents</td><td>Number of events in the file</td></tr>
+<tr><td>$.file.runStart</td><td>MJD of run start minus 40587 (unix time in days)</td></tr>
+<tr><td>$.file.runEnd</td><td>MJD of run end minus 40587 (unix time in days)</td></tr>
+<tr><td>$.file.drsFile</td><td>If this is a DRS calibration file, the step id, otherwise -1</td></tr>
+<tr><td>$.file.isMC</td><td>True is this was requested as Monte Carlo file</td></tr>
+<tr><td>$.file.isDRS</td><td>True if DRS calibration constants were requested</td></tr>
+<tr><td>$.file.isCalibrated</td><td>True if a calibrated file was requested</td></tr>
+<tr><td>$.event</td><td>The event header information as obtained from the file</td></tr>
+<tr><td>$.event.numRoi</td><td>Number of samples per pixel</td></tr>
+<tr><td>$.event.numPix</td><td>Number of pixels</td></tr>
+<tr><td>$.event.eventNumber</td><td>Event number</td></tr>
+<tr><td>$.event.triggerNumber</td><td>Trigger number</td></tr>
+<tr><td>$.event.triggerType</td><td>Trigger type</td></tr>
+<tr><td>$.event.trigger</td><td>Decoded trigger information</td></tr>
+<tr><td>$.event.unixTime[2]</td><td>Timestamp when the event arrived at the event builder (unix time in s and us)</td></tr>
+<tr><td>$.event.time</td><td>Date object according to unixTime (ms precision)</td></tr>
+<tr><td>$.data[numPix][numRoi]</td><td>The event data</td></tr>
+<tr><td>$.nroi</td><td>Shortcut to $.event.numRoi</td></tr>
+<tr><td>$.npix</td><td>Shortcut to $.event.numPix</td></tr>
+<tr><td>$.trigger</td><td>Shortcut to $.event.trigger</td></tr>
+<tr><td>$.neighbors</td><td>Array of 1440 arrays each containing the corresponding neighbors</td></tr>
+<tr><td>$.map</td><td>Array of 1440 entries (software index) containing the hardware indices.</td></tr>
+<tr><td>$.geom</td><td>Array of 1440 entries. Each an array with two entries, x and y. The distance between two neighbors is 1.</td></tr>
+<tr><td>$.dist(i,j)</td><td>Calculated the distance of two pixels in degree.</td></tr>
+<tr><td>$.conv</td><td>Conversion factor to convert geom and dist to degree.</td></tr>
+</table>
+
+<H3>Stack traces</H3>
+Please note that due to some interna, the line numbers in the
+stack trace shown in case of runtime errors are by one line too high.
+
+<H3>Editor 1 (proc)</H3>
+
+<I>proc</I> can return an array with numRoi entries or an array with up to 
+four sub-arrays each of nRoi entries. They will be displayed in the graph.
+The chosel pixel is available as <I>pixel</I>.
+The most simple is to just return the selected pixel data unprocssed:
+<pre>
+return $.data[pixel];
+</pre>
+
+<H3>Editor 2 (main)</H3>
+<I>main</I> should return extracted data per pixel. As <I>proc</I> it can
+return a single array or an array with up to four sub-arrays each with
+numPix entries. They are displayed in the camera displays. The function
+implemented as <I>proc</I> is accessible as <I>proc(i)</I> with <I>i</I> 
+being available in <I>proc</I> as <I>pixel</I>. A very simple extractor
+could be to return just the sample at the trigger position
+<pre>
+var rc = [];
+for (var i=0; i<$.event.numPix; i++)
+    rc[i] = $.data[i][60];
+return rc;
+</pre>
+or taking the data pre-procesed by the code of the <I>proc</I>-function:
+<pre>
+var rc = [];
+for (var i=0; i<$.event.numPix; i++)
+    rc[i] = proc(i)[60];
+return rc;
+</pre>
+
+Note that the precise access to the result of proc might depend on what
+exactly is retruned by proc (an array, or an array with sub-arrays).
+
+Pixel which are not returned (<tt>undefind</tt> or <tt>null</tt>) are
+not displayed. This allows to show cleaned images as well or test
+image cleaning algorithms.
+
+<H3>What is the data?</H3>
+The data are all data files found in disks in La Palma (to be precise:
+on daq's disks). The data is raw-data but with the most recent 
+DRS calibration (only the 1024-cell offset calibration) 
+applied, while the application is done in intergers, i.e. the
+fractional part of the calibration constant is removed. 
+(This is basically what is written in our FITS files as part of the
+lossless compression process). No spike or jump removal is applied.
+
+<H3>The editor</H3>
+Key bindings of the editor can be found at 
+<A HREF="http://codemirror.net/doc/manual.html#commands">Codemirror</A>.
+In addition the following binding are defined: Tab - Auto indent;
+F11 - Switch to fullscreen; Esc - In fullscreen mode to 
+leave fullscreen; Ctrl-r - replace; Ctrl-y - Delete the line under the cursor;
+Ctrl-. (dot) - Fold code; Ctrl-Down (cursor down) - Autocomplete.
+
+<H3>How to change the file?</H3>
+Start typing the date in the filename field. The available files 
+will be filtered as you type. To select a file you need to select
+it fom the pull down.
+
+<H3>What is the meaning of the DRS and Cal checkboxes?</H3>
+For some files, files which contain calibrated data are available. 
+This means that the DRS calibration (offset (1024), gain and offset
+(roi)) has been applied. Enabling the checkbox will show this data
+instead of the raw data. Note that the precision is limited to 0.1mV.
+In some cases files were taken to deduce this calibration constants
+(DRS files). This is done in four steps: offset, gain, offset (1024),
+offset (roi). These steps are called 0, 1, 2 and 2 respectively. If the
+checkbox Drs is enabled, the corresponding calibration constants as
+stored in the .drs.fits file, are shown, which is
+<I>BaselineMean</I> [0], <I>GainMean</I> [1] and <I>TriggerOffsetMean</I> [2].
+
+<H3>What is the meaning of the MC checkbox?</h3>
+Currently, it is only to indicate whether the chosen file
+is a Monte Carlo file or not. At the moment, all available
+Monte Carlo file have a four-digit <I>year</I> starting with
+a 0.
+
+<H3>Are there Monte Carlo files available?</H3>
+Yes, there are. Monte Carlo files have the date 0000/00/00 and  the
+praticle ID as run-number (1: gamma, 6: muon, 14: proton). To my
+understanding, the run-numbers 100, 101 and 102 refer to pedestals with
+closed shutter (100 and 101) and open shutter (102).
+
+<H3>How to change the displayed pixel?</H3>
+Enter the pixel number on the corresponding field or its hwardware 
+address. As soon as you acknowledge your change (e.g. remove focus 
+by clicking somewhere else) the pixel contents gets displayed.
+
+<H3>How to Save/Load a script?</H3>
+To load a file choose a file fro your local hard drive via the
+file selection dialog. To save the contents of the editor, press
+Save.
+
+<H3>Submit</H3>
+If you have changed the script and you want to run it on the current event
+press Submit. The Javascript will be executed for this event on
+the server.
+
+<!--<H3>Autosubmit</H3>
+If Autosumit is enabled, the script will be submitted each time
+the file name or the event number is changed and executed.-->
+
+<H3>Pixel value</H3>
+To display the value returned for a pixel just click on the pixel.
+The value will be displayed in the Pixel field. This will also
+display the corresponding waveform in the graph.
+
+<H3>Min/max values</H3>
+Min and max values for the plot and the graph can be determined
+automatically or manully. To set the to a fixed value, enable the
+min and/or max field and enter the value of your choice. It will
+survive changing files, events or pixel.
+
+<H3>What is the meaning of the image?</H3>
+The image is a representation of the first and second moment of the
+distribution of the pixel values. The first moment is the center-of-gravity
+of the distirbution, the major and minor axis represent the standard 
+deviation around the center-of-gravity (<i>width</I> and <i>length</I>). 
+The line represents an estimate for the distance of the center-of-gravity
+to the origin of the primary particle (<i>disp</i>). Due to the lack
+of more information, it is a very simple estimate using
+disp=1.42*(1-width/length).
+
+<H3>What are the additional controls</H3>
+<i>Get geometry</i>: You will get a file with the pixel positions in arbitrary units.
+The three columns are the pixel index, and the x and y coordinate 
+in degree.<br>
+<i>Get camera data</i>: You will get a file with the data from the currently
+displayed cameras. The columns are pixel index and value of the cameras
+1, 2, 3 and 4.<br>
+<i>Get waveforms</i>: You will get a file with the data from the currently
+displayed waveforms. The columns are sample index and amplitude  of the waveforms
+1, 2, 3 and 4.
+
+<H3>Why is loading the page so slow?</H3>
+The total contents of the javascript libraries is about 1MB which
+all have to be treasferred to the browser. In addition the loading
+and processing of the event takes up to 1s so that the loading
+time of the page might be untypically slow. Once finished,
+the amaount of code to load can be decreased.
+
+<H3>How to unzoom the plot?</H3>
+Double click on the plot.
+
+</div>
+
+
+</body>
+</html>

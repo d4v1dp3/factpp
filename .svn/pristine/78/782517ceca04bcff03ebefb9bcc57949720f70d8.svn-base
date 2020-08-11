@@ -1,0 +1,106 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Ratescan
+# ==========================================================================
+# Script for taking a Ratescan
+
+# call it by: .x ScriptsForDimCtrl/Ratescan.dim mode=<trackmode> ra=<Right ascension> dec=<Declination> source=<source_name>
+# mode=0: Manual tracking Mode: set tracking in drivectrl manually
+# mode=1: Coordinate Mode: scripts sends tracking command to drivectrl with the given RaDec coordinates
+# mode=2: source Mode: scripts sends tracking command to drivectrl with the given source_name
+# ----------------------------------------------------
+
+> ======================================
+> RATESCAN
+> ======================================
+>-
+> Preparing Drive
+.j ${mode}
+
+# --------------------------------------
+
+:0
+> Manual tracking Mode
+> ---------------------
+> OPERATOR
+> change tracking in drivectrl manually
+>_
+> script will wait for drive
+> to be in state tracking
+>-
+.j 9
+
+# --------------------------------------
+
+:1
+> ...stop tracking
+.x ScriptsForDimCtrl/ServiceScripts/StopTracking.dim
+> ...change tracking of telescope to:
+> ...Ra  = ${ra}
+> ...Dec = ${dec}
+>-
+DRIVE_CONTROL/TRACK ${ra} ${dec}
+.j 9
+
+# --------------------------------------
+
+:2
+> ...stop tracking
+.x ScriptsForDimCtrl/ServiceScripts/StopTracking.dim
+> ...change tracking of telescope to:
+> ...${source}
+>-
+DRIVE_CONTROL/TRACK_SOURCE 0 0 "${source}"
+.j 9
+
+# --------------------------------------
+
+:9
+# check drive system
+.x ScriptsForDimCtrl/ServiceScripts/IsTracking.dim
+
+# check system status
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+>---------------------------------------
+#
+#> Preparing FTM_CONTROL
+#> ...configure Ratescan
+# FTM_CONTROL/CONFIGURE ratescan
+#
+#>---------------------------------------
+
+> Starting Ratescan
+> ...waiting for Ratescan
+>    to be in state 4: Connected
+.s RATE_SCAN 4 5000 256
+RATE_SCAN/START_THRESHOLD_SCAN 50 1000 -10
+.s RATE_SCAN 6 10000 257
+> ...processing ratescan
+.s RATE_SCAN 4 2700000 300
+> ...resetting FAD configuration
+FAD_CONTROL/RESET_CONFIGURE
+> ======================================
+> Ratescan finished
+> ======================================
+.j 301
+
+:256
+>---------------------------------------
+> Rate_Scan not in correct state
+>-
+> OPERATOR:
+> + check connection to ftm control
+>---------------------------------------
+.j 300
+
+:257
+>---------------------------------------
+> ratescan not started
+>---------------------------------------
+
+:300
+> ======================================
+> Ratescan NOT successfull
+> ======================================
+:301

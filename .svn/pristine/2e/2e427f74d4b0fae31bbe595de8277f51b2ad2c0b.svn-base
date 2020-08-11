@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>FACT shift schedule</title>
+   <link rel="stylesheet" media="screen" href="./calendar.css" type="text/css" />
+   <script type="text/javascript" src="./calendar.js"></script>
+   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+</head>
+<body id="body" onresize="resize();">
+<div id="calendar" style="position:fixed;top:0;left:0;overflow:hidden;"/>
+</body>
+</html>

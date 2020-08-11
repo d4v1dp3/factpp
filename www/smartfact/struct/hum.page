@@ -1,0 +1,6 @@
+Humidity
+weather|Current|$0%|
+weather|Minimum|$0%|
+weather|Average|$0%|
+weather|Maximum|$0%|
+|hist=hist-magicweather-hum.bin/%|

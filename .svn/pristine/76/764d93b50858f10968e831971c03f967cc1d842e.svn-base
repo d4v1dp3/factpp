@@ -1,0 +1,116 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Startup
+# ==========================================================================
+# Script for Software Startup
+
+# call it by: .x ScriptsForDimCtrl/Startup.dim
+
+# ----------------------------------------------------
+
+> ======================================
+> SYSTEM STARTUP
+> ======================================
+> BIAS_CONTROL
+> ...checking state of biasctrl
+.s BIAS_CONTROL 1 1000 2
+> ...bias DISCONNECTED
+> ...reconnecting
+BIAS_CONTROL/RECONNECT
+
+:2
+> ...wating for state 7: VoltageOff
+.s BIAS_CONTROL 7 2000 3
+.j 4
+
+:3
+.s BIAS_CONTROL 9 2000 256
+> ...VoltageOn
+> ...ramping down
+BIAS_CONTROL/SET_GLOBAL_DAC 0
+> ...waiting for bias ramping
+.s BIAS_CONTROL 5
+> ...ramping
+.s BIAS_CONTROL 7 15000 4
+
+:4
+> ...connected, VoltageOff
+> Bias ready
+> --------------------------------------
+
+# --------------------------------------
+
+> FTM_CONTROL
+> ...enabling all FTUs
+FTM_CONTROL/ENABLE_FTU -1 yes
+> ...waiting 6 seconds
+.w 6000
+
+# --------------------------------------
+> FAD_CONTROL
+> ...starting FADs
+
+FAD_CONTROL/START
+> ...checking fadctrl state
+.s FAD_CONTROL 4 5000 5
+> ...connected
+> FADs Ready!
+> --------------------------------------
+>-
+.j 300
+
+# --------------------------------------
+:5
+> --------------------------------------
+> not all FADs are connected
+> sending two triggers to request update
+
+FAD_CONTROL/SEND_SINGLE_TRIGGER
+.w 3000
+
+FAD_CONTROL/SEND_SINGLE_TRIGGER
+.w 2000
+
+> ...checking fadctrl state again
+.s FAD_CONTROL 4 5000 6
+> ...connected
+.j 300
+
+# --------------------------------------
+:6
+> --------------------------------------
+> not all FADs are connected
+> --------------------------------------
+> OPERATOR:
+> + check for FAD or FTU Loss
+> + finish Startup manually
+> --------------------------------------
+.j 301
+
+# --------------------------------------
+
+:256
+> --------------------------------------
+> BIAS not properly connected
+> --------------------------------------
+> OPERATOR:
+> + check biasctrl
+> + finish Startup manually
+> --------------------------------------
+.j 301
+
+# --------------------------------------
+
+:300
+> ======================================
+> SYSTEM STARTUP finished successfully
+> ======================================
+
+# --------------------------------------
+
+:301
+> ======================================
+> SYSTEM STARTUP finished with PROBLEMS
+> ======================================
+

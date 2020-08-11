@@ -1,0 +1,21 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Take a Pedestal 1000 run with Bias ON
+# ==========================================================================
+
+# check if all subsystems are in the correct state
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+
+> taking Pedestal with BIAS on 1000 ...
+MCP/START -1 1000 pedestal
+
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8    # Writing Data
+
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4    # Connected
+
+> ... done
+
+

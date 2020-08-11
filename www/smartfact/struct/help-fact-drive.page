@@ -1,0 +1,37 @@
+FACT
+|<h4>Drive</h4>
+The current drive status is displayed if the dim-network is online
+and the drivectrl has connection to cosy.
+
+The backround colors have the following meaning:
+<ul class='help'>
+<li>Drive is tracking</li>
+<li>Drive is tracking and the control deviation is larger than one arc-minute</li>
+<li>Drive is tracking and the control deviation is larger than two arc-minutes or the drive is in ERROR state</li>
+<li>Drive is offline, or online and neither moving nor tracking</li>
+<li>Drive is moving</li>
+</ul>
+
+If the drive is online, the current pointing position is displayed. Between
+sun-rise and sun-set a sun-symbol (&#9788;) is displayed. If between
+sun-set and sun-rise the moon is above horizon, a moon-symbol (&#9790;)
+is displayed. During tracking the current control deviation is 
+displayed behin a plus-minus symbol (&plusmn;). If the source name of
+the current tracking position is available it is displayed in []-parenthesis.
+If the drive is currently moving a moving-symbol (&#10227;) is displayed.
+
+If the drive is online and in error state this is also indicated by the
+extension [ERR]. This should make it easier to detect this state.
+
+If the drive is switched off and either the sun- or the moon-symbol is
+visible, it is extended with either the time until sun-set (indicated 
+with a down-arrow &darr;) or the moon disk visibility in percent.
+When the drive is switched on, this information is omitted due to space
+reasons.
+
+The &otimes;-symbol means that the drive is locked.
+
+More detailed informations about the sun and moon can be found at the
+weather page. More detailed tracking and pointing information at the
+drive page.
+|

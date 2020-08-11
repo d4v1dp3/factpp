@@ -1,0 +1,35 @@
+#!dimctrl --exec
+
+# DIMSCRIPT
+.! echo `date -u`  "switch on bias feedback - REF 100 " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo
+FEEDBACK/STOP
+.s FEEDBACK 6
+.w 500
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.s BIAS_CONTROL 7
+.w 10000
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+.s BIAS_CONTROL 9
+FEEDBACK/START_CURRENT_CONTROL 0.0
+.w 500
+FEEDBACK/ENABLE_OUTPUT yes
+
+#bad coding here
+.! echo `date -u`  "Waiting for 90 sec ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.w 90000
+.s BIAS_CONTROL 9
+FEEDBACK/STOP
+FEEDBACK/START_GLOBAL_FEEDBACK 25
+FEEDBACK/SET_REFERENCE 100
+
+FAD_CONTROL/SET_FILE_FORMAT 0
+.! echo `date -u`  "Starting Ext. Lightpulser run for 100 Events!!!!!" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 500 light-pulser-ext
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+.! echo `date -u`  "@SHIFTER: please set BY HAND the FEEDBACK REFERENCE to the desired voltage setpoint" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "@SHIFTER: .... do: FEEDBACK/SET_REFERENCE <voltage in mV>" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+

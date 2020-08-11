@@ -1,0 +1,87 @@
+Sounds
+|
+Sounds have to be explicitly switched on in the URL, <i>e.g.</I>
+
+<pre>
+http://[url]/?sound
+</pre>
+
+Sounds will only be available on pages with regular updates, which are
+the main page and the status page. If sounds are not available,
+a stroke out speaker is displayed.
+
+Note that these pages are only reloaded once in a few seconds. If more
+than one sound is to be played during that time only the last sound
+will be played, <I>i.e.</I> that in special circumstances some sounds
+might be missed.
+
+In the following examples of all available sounds are listed.
+|
+|<h4>Startup</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/startup.mp3"/>
+  <source type="audio/ogg" src="audio/startup.ogg"/>
+</audio><br/>
+This sound is played whenever the control-program of the slow control board
+(fscctrl) gets contact to the hardware. This is usually the case when
+the camera is switched on.
+|
+|<h4>Shutdown</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/shutdown.mp3"/>
+  <source type="audio/ogg" src="audio/shutdown.ogg"/>
+</audio><br/>
+This sound is played whenever the control-program of the slow control board
+(fscctrl) looses contact with the hardware. This is usually the case when
+the camera is switched off.
+|
+|<h4>Error</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/error.mp3"/>
+  <source type="audio/ogg" src="audio/error.ogg"/>
+</audio><br/>
+If a severe error happens, this sounds is displayed. Until the error
+remains, a warning symbol is also displayed in the upper left corner 
+and links to current error messages. A history of erros is accessible
+from the status page via the Smartfact entry.
+|
+|<h4>Script ends</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/ding.mp3"/>
+  <source type="audio/ogg" src="audio/ding.ogg"/>
+</audio><br/>
+A ding is played if a script has ended or been stopped.
+|
+|<h4>Manual run ends</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/dong.mp3"/>
+  <source type="audio/ogg" src="audio/dong.ogg"/>
+</audio><br/>
+If a run has been started manually, <I>i.e.</i> no script is running
+at the same time, a ding is played when the run end or to be more
+precise when the Master Control Program (MCP) changed its state
+from TakingData to Idle which happens when the data acquisition (fadctrl)
+leaves its state WritingData.
+|
+|<h4>Automatic run ends</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/losticks.mp3"/>
+  <source type="audio/ogg" src="audio/losticks.ogg"/>
+</audio><br/>
+For this tick-sound the same conditions apply than for the previous sound
+except that it is played when a script is executed while the run ends.
+The same sound is played whenever a run is started, <i>i.e.</I> the Master
+Control Program (MCP) changed its state from TriggerOn to TakingData
+which happens when the first even has been received and the data 
+acquisition (fadctrl) changed its state to WritingData.
+
+|
+|<h4>Message</h4>
+<audio controls id="audio">
+  <source type="audio/mp3" src="audio/message.mp3"/>
+  <source type="audio/ogg" src="audio/message.ogg"/>
+</audio><br/>
+This sound will be played if a new message is distributed by the chat-server.
+The chatlog and the possibility to send messages is available from the
+Chat Server entry in the status page.
+|

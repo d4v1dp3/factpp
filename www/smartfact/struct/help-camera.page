@@ -1,0 +1,14 @@
+Camera
+|image=fact-camera.png|
+|
+The camera display is available in different types. It can display 40
+(board) values, 160 (patch) values, 320 (bias channel) values or
+1440 pixels. Depending on the type of input data several pixels mights
+consequently be displayed in the same color.
+|
+|<h4>min / med /max</h4>
+The minimum, median and maximum value of all values displayed in the camera.
+|
+|<h4>Scale</h4>
+The color scale of the displayed data.
+|

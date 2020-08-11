@@ -1,0 +1,26 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Script for taking data when you are tracking wobble position 2
+# ==========================================================================
+
+# Move Telescope to Wobble Position 2
+>
+> --------------------------------------
+> data taking for Wobble 2
+> starting up...
+> --------------------------------------
+> --------------------------------------
+> OPERATOR:
+> + make sure the telescope is tracking
+>   wobble position 2 of the source
+> + Measure Sky Brightness
+> --------------------------------------
+>
+
+# taking a Data Set (1x Pedestal 1000 Bias On, 1x LPext 1000, 4x5min DataRun)
+.x ScriptsForDimCtrl/ServiceScripts/TakeData.dim
+
+> --------------------------------------
+> data taking for Wobble 2 finished
+> --------------------------------------

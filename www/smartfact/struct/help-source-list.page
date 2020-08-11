@@ -1,0 +1,20 @@
+Source list
+|
+The current position on the local sky in La Palma for all 
+sources available in the database is listed.
+
+The backround colors have the following meaning:
+<ul class='help'>
+<li>Source above 30&deg; zenith distance. The sensitivity is at
+optimum.</li>
+<li>Source between 65&deg; and 30&deg; zenith distance. The sensitivity
+is significantly reduced compared to low zenith angle
+observations.</li>
+<li>Source between 85&deg; and 65&deg; zenith distance. Observation of
+such a source is only useful in very very special  cases. The
+sensitivity dramatically suffers from the high zenith angle.</li>
+<li>Source not visible. Source below 85&deg; zenith
+distance or below the horizon.</li>
+</ul>
+
+|

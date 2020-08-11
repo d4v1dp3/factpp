@@ -1,0 +1,6 @@
+Wind gusts
+weather|Current|$0 km/h|
+weather|Minimum|$0 km/h|
+weather|Average|$0 km/h|
+weather|Maximum|$0 km/h|
+|hist=hist-magicweather-gusts.bin|

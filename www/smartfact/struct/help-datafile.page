@@ -1,0 +1,43 @@
+Datafile format
+|
+A datafile is a file which is automatically loaded every few seconds
+and the values displayed on a page are updated. If the page name
+is <I>mypage.page</I> the name of the corresponding data file is
+<I>mypage.data</I>.
+
+The first line of the data file always contains a thirteen-digit number
+which is the time (in UTC) corresponding to the contained data
+as Unix time (milli-seconds since 1/1/1970). Seprated with tabs, it can
+contain to additional numbers. The first one defines if the warning
+sign is displayed (&gt;=1 means that it is displayed) and the
+second defines whether the script stop sign is displayed in green or red.
+For data-files which are not guranteed to be updated in reasonable
+intervals, it is advisable to not write the two numbers at all.
+
+Each following line contains columns seperated by tabs. The first column
+contains the background color of the row. It can be given in any
+representation accepted by HTML, usually #rrggbb. The following columns
+contain values or text which will replace the $N in the format given
+in the page file, <i>e.g.</i>
+
+If the second line of the data file contains
+
+<pre>
+blue\t0\t42.0
+</pre>
+
+while \t here representas the ascii character 9 ('\t' in C and C++), and the format
+in the page files looks like
+
+<pre>
+$1 shoes and $0 socks
+</pre>
+
+the row displayed will be
+
+<pre>
+42.0 shoes and 0 socks
+</pre>
+
+with a blue background.
+|

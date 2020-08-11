@@ -1,0 +1,24 @@
+About
+|image=Flynns_file.png|
+
+|
+<U><B>SmartFACT++</B></U><br/>
+<B><TT>FACT telescope web control system</tt></B>
+
+Frontend power by <B>JavaScript</B><br/>
+Backend powered by <B>boost</B> and <B>dim</B>
+
+<B>Dim homepage:</B> <A HREF="http://dim.cern.ch">dim.cern.ch</A><br/>
+<B>FACT homepage:</B> <A HREF="http://www.fact-project.org">www.fact-project.org</A>
+
+<B>Written by:</B> T.Bretz<br/>
+<B>Contact:</B> <tt><A href="emailto:tbretz@physik.rwth-aachen.de">tbretz@physik.rwth-aachen.de</A></tt><br/>
+<B>Copyright:</B> &copy; T.Bretz (FACT Collaboration, 2012)
+
+<B>Collaborating institutes:</b><br/>
+&nbsp;&bull; ETH Z&uuml;rich<br/>
+&nbsp;&bull; ISDC (University Geneva)<br/>
+&nbsp;&bull; TU Dortmund<br/>
+&nbsp;&bull; University W&uuml;rzburg
+|
+

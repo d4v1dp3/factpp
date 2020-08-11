@@ -1,0 +1,27 @@
+FACT
+|<h4>System status</h4>
+Here the status of the whole system is summarized.
+
+The backround colors have the following meaning:
+<ul class='help'>
+<li>DNS online, MCP taking data, FAD taking data</li>
+<li>n/a</li>
+<li>n/a</li>
+<li>DNS offline of MCP in idle state</li>
+<li>DNS online, MCP configuring, configured or trigger on, MCP taking data and FAD not taking data, or
+ratecontrol in SettingThreshold or ratescan in progress.</li>
+</ul>
+
+The MCP state Idle, any configuring state and configured are display
+as text <I>Idle</I>, <I>Configuring</I> or <I>Configured</I>. In
+brackets the name of the last configured, or corresponding configuration
+is displayed. In case the trigger is swicthed on or the MCP is in state
+data-taking, only the configuration name and the last available
+DRS trigger baseline calibration run is displayed in parenthesis, if
+available. For the special cases that the threshold is currently
+calibrated or a rate scan is in progress, <I>Calibrating threshold</I> or
+<I>Rate scan in progress</I> is displayed. Is the MCP is configured to take
+data or data-taking is in progress, either the length of the run to be taken
+and/or the number of events to be taken are displayed, or an estimate of 
+the remaining time and/or number.
+|

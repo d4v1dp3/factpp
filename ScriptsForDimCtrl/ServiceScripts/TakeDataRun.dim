@@ -1,0 +1,19 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Take a 5min Data Run
+# ==========================================================================
+
+# check if all subsystems are in the correct state
+.x ScriptsForDimCtrl/ServiceScripts/IsReadyForDataTaking.dim
+
+> taking Data:FullTriggerArea 5min Run ...
+MCP/START 300 -1 data
+
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8    # Writing Data
+
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4    # Connected
+
+> ... done

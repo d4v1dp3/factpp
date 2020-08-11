@@ -1,0 +1,37 @@
+Layout
+|<h4>Home</h4>
+Links from all other pages (except the home page itself) to the home page
+|
+|<h4>Watchdog</h4>
+The two dots on the left and the right of the title change their color
+with every retrieved data or graphics file, respectively. This is a way
+to find out if the continous retrieval is still in progress.
+|
+|<h4>Time stamp of displayed data</h4>
+Each data file which is loaded from the server comes with a time-stamp.
+This time-stamp is displayed here. This allows for example to find out
+whether the values are still valid or just the last values produced by the
+system hours ago. If this time-stamp is older than sixty seconds,
+the time is displayed in red color.
+|
+|image=fact-inactive.png|
+|<h4>Link to help page</h4>
+Links to a page giving information about the data currently displayed,
+<i>e.g.</i> meaning of background colors, etc.
+|
+|<h4>Link to control page</h4>
+A direct link to the control page from which actions can be initiated.
+|
+#|<h4>Title</h4>
+#|
+|<h4>Stop script</h4>
+If this button is pressed a STOP is sent to the script control and the script
+should be terminated. On pages which are updated regularly, the color
+shows if a script is running (green) or not (red). When the 
+button is displayed uncolored, the data is in general not updated often enough
+to deliver up-to-date information.
+|
+|<h4>Current UTC</h4>
+The current UTC time is displayed. If this does not happen anymore there
+is a problem with the JavaScript. This is a bug and should never happen.
+|

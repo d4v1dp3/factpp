@@ -1,0 +1,10 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Checking drive system status to be ready for data taking
+# ==========================================================================
+
+>
+> ...waiting for DRIVE to be in state 9: OnTrack
+.s DRIVE_CONTROL 9
+> ...OK

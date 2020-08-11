@@ -1,0 +1,58 @@
+#!/bin/bash
+
+case $1 in
+   config)
+        cat <<'EOM'
+graph_args --lower-limit -15 -r
+graph_title Temperature
+graph_vlabel temperature
+graph_category environment
+container_temp.label container
+magic_temp.label MAGIC
+magic_dew.label dew point
+container_temp.warning 35
+container_temp.critical 40
+EOM
+        exit 0;;
+esac
+
+
+DATA=`curl -s "http://10.0.100.234/statusjsn.js?components=18179&_=1365876572736"`
+
+RC=$?
+
+if [ "$RC" == "0" ] ; then
+
+     . /etc/munin/plugins/ticktick.sh
+
+     tickParse "$DATA"
+
+     VAL1=``sensor_values[0].values[0][0].v``
+     MIN1=``sensor_values[0].values[0][0].st[0]``
+     MAX1=``sensor_values[0].values[0][0].st[1]``
+
+     echo container_temp.value $VAL1
+
+fi
+
+
+VAL2=`wget -q -O- http://www.magic.iac.es/site/weather/weather_data.txt | grep TE | cut -c3-`
+
+RC=$?
+
+if [ "$RC" == "0" ] ; then
+
+    echo magic_temp.value $VAL2
+
+fi
+
+
+VAL3=`wget -q -O- http://www.magic.iac.es/site/weather/weather_data.txt | grep DP | cut -c3-`
+
+RC=$?
+
+if [ "$RC" == "0" ] ; then
+
+    echo magic_dew.value $VAL3
+
+fi

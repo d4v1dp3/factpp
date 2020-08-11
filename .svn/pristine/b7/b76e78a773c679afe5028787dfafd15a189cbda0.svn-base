@@ -1,0 +1,4 @@
+!Reload Sources|reloadsources
+control-irq|This sends the interrupt 'Reload Sources'. It is supposed to
+schedule a reloading of the sources in drivectrl before the next
+pointing operation. |

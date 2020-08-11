@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="Resources">
+    <file>icons/green bar.png</file>
+    <file>icons/green check.png</file>
+    <file>icons/green warn.png</file>
+    <file>icons/in progress.png</file>
+    <file>icons/gray circle 1.png</file>
+    <file>icons/green circle 1.png</file>
+    <file>icons/orange circle 1.png</file>
+    <file>icons/red circle 1.png</file>
+    <file>icons/warning 1.png</file>
+    <file>icons/warning 2.png</file>
+    <file>icons/warning 3.png</file>
+    <file>icons/warning 4.png</file>
+    <file>icons/yellow circle 1.png</file>
+  </qresource>
+</RCC>

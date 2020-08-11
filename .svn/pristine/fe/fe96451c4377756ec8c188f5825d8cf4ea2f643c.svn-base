@@ -1,0 +1,60 @@
+'use strict';
+
+// This list contains the schedule for one or several nights.
+// The schedule consists of observations and measurements.
+// An observation is compiled by several measurements.
+// Most measurements (like RATESCAN) cannot be interrupted, but
+// will be finished at some point (like a single run).
+// A measurement which takes until the next observation is started is DATA.
+// Whenever a measurement is finished and the start time of a new
+// observation has passed, the new observation is started.
+// In an observation it makes only sense that the last measurment
+// is data. All previous measurement just take as much time as they take.
+// Note that after each measurement, a new observation might be started
+// if the start time of the new observation has passed. Thus there is,
+// strictly speaking, no gurantee that any other than the first measurement
+// of one observation will ever be excuted.
+// A list of observations must end with a shutdown.
+//
+// here is an example:
+//
+var observations =
+[
+ { date:"2013-03-14 19:55 UTC", measurements:
+     [
+      { task:'startup' }
+     ]
+ },
+
+ { date:"2013-03-14 20:05 UTC", measurements:
+     [
+      { task:'data', source:'Crab' }
+     ]
+ },
+
+ { date:"2013-03-14 23:58 UTC", measurements:
+     [
+      { task:'ratescan', ra:9.438888, dec:29.0 },
+      { task:'data',     source:'Crab'        }
+     ]
+ },
+
+ { date:"2013-03-15 00:45 UTC", measurements:
+     [
+      { task:'ratescan', ra:11.26888888, dec:28.4477777 },
+      { task:'data',     source:'Mrk 421'}
+     ]
+ },
+
+ { date:"2013-03-15 03:30 UTC", measurements:
+     [
+      { task:'data', source:'Mrk 501'}
+     ]
+ },
+
+ { date:"2013-03-15 06:38 UTC", measurements:
+     [
+      { task:'shutdown'}
+     ]
+ },
+];

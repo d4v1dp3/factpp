@@ -1,0 +1,5 @@
+Container Temp
+status|24h Minimum|$0&deg;C|
+status|Current temp|$0&deg;C|
+status|24h Maximum|$0&deg;C|
+|hist=hist-temperaturecontrol.bin/&deg;C|

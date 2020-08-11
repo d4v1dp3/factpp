@@ -1,0 +1,13 @@
+FACT
+|<h4>Humidity / Wind</h4>
+If the dim network is online and magicweather is in state Receiving and
+at least one report has been received since smartfact was started,
+the current humidity and a measure for the wind gusts from the
+MAGIC weather station are displayed.
+
+<ul class='help'>
+<li>Wind gusts below 35km/h and humidity below 95%</li>
+<li>Wind gusts larger than 35km/h or humidity larger than 95%</li>
+<li>Wind gusts larger than 45km/h or humidity larger than 98%</li>
+</ul>
+|

@@ -1,0 +1,19 @@
+FACT
+|<h4>Relative camera temperature</h4>
+The difference between the average temperatur in the sensor compartment
+and the outside temperature as measured by the MAGIC weather station
+is displayed if both value are available.
+
+A green background means
+that a valid number is displayed, i.e. that the camera is
+switched on because values were recived from the slow control
+board and values are received from the MAGIC weather station.
+
+The backround colors have the following meaning:
+<ul class='help'>
+<li>Relative camera temperature as usual</li>
+<li>Relative camera temperature above 9&deg;C</li>
+<li>Relative camera temperature abive 15&deg;C</li>
+</ul>
+
+|

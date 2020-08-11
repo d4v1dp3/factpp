@@ -1,0 +1,30 @@
+#!dimctrl --exec
+
+# This sript takes a DRS Calibration for data of ROI=1024
+# Making sure bias is off
+.! echo `date -u` "First DRS Calibration Script starting up..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u` "-------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+FEEDBACK/ENABLE_OUTPUT 1
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.s BIAS_CONTROL 7
+FAD_CONTROL/START_DRS_CALIBRATION
+.! echo `date -u` "bias voltage is switched off" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u` "taking DRS:Pedestal 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-pedestal
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u` "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u` "taking DRS:Gain 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-gain
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u` "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u` "taking DRS:Pedestal 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-pedestal
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u` "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+

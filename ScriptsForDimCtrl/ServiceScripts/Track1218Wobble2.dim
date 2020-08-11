@@ -1,0 +1,18 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# changing tracking to "1ES 1218+304" Wobble 2
+# ==========================================================================
+
+>
+> moving telescope to wobble position 2
+> ...waiting for DRIVE_CONTROL
+>    to be in state 6: Armed
+
+.s DRIVE_CONTROL 6
+> DRIVE: ARMED
+.w 5000
+
+DRIVE_CONTROL/TRACK_SOURCE 0.6 175 "1ES 1218+304"
+>...sent tracking command for 1ES 1218+304 Wobble 2
+> COMMAND: DRIVE_CONTROL/TRACK_SOURCE 0.6 175 "1ES 1218+304"

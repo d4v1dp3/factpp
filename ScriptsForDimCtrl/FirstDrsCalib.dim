@@ -1,0 +1,191 @@
+#!dimctrl --exec
+
+>
+> -------------------------------------------
+> First DRS Calibration Script starting up...
+> -------------------------------------------
+
+.w 2000
+# As a First step we want to calibrate the current, which are read from the bias crate,
+# and not take a DRS calibration, as it is mentioned in the data taking page...
+# so for this we should get the feedback and biasctrl programs into known states
+# I think it is good to try a RECONNECT to the bias, and make sure the voltage is off
+# Since we do not know, what the feedback program is doing at the moment, we should as well,
+# tell it to keep its mouth shut ... just to be sure, we know whats going on
+> stopping feedback
+FEEDBACK/STOP
+.w 2000
+# stopping should always be possible, and end in state 'Connected'(6)
+> ...waiting for FEEDBACK to be in state 6: Connected
+.s FEEDBACK 6
+> ..done
+
+#BIAS_CONTROL/RECONNECT
+# If we were disconnected, and this was the first try of the night, the bias_ctrl should
+# be in state 'VoltageOff'(7) more or less immediately
+#.s BIAS_CONTROL 3
+#.s BIAS_CONTROL 7 5000
+# if these assumptions are all wrong, then we might have been properly connected anyway,
+# and just have to ramp down... lets do it, but wait forever, in case it does not work
+> switching off bias
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.w 2000
+> ...waiting for BIAS to be in state 7: VoltageOff
+.s BIAS_CONTROL 7
+> ...done
+
+# in case we reach this line, the voltages are all off, and the feedback does not do anything
+# So lets do the current calibration, therefor we tell the bias crate to ramp up just 1 single DAC count(~22mV)
+# the result of this action is, to get bias_ctrl into the state 'VoltageOn'(9), but since we only go one DAC count it shouldn't take long
+> setting bias globally to 1 DAC
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+.w 2000
+> ...waiting for BIAS to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+> ...done
+
+# now we may tell the feedback program to calibrate the currents ...
+# I do not understand, if I have to explicitely allow the feedback program to generate output,
+# or if it just produces output...
+# As far as I understand, the feedback output enable status is the same,
+# as it was before I send the STOP command... so it is unknown at this point.
+# and in addition enabling or disabling the output, when STOPed is not possible as far as I know...
+# I try to enable it anyway.
+> enabling output for feedback
+FEEDBACK/ENABLE_OUTPUT yes
+.w 2000
+> ...done
+
+> calibrating bias crate current readings...
+FEEDBACK/CALIBRATE_CURRENTS
+.w 5000
+# in order to find out when the calibration ends, we have to wait for the transistion from state
+# 'Calibrating'(13) back to 'Connected'(6)
+> ...waiting for FEEDBACK to be in state 13: Calibrating
+.s FEEDBACK 13
+> ...waiting for FEEDBACK to be in state 6: Connected
+.s FEEDBACK 6
+
+# Thomas Bretz told me, that the feedback, after this is step has disabled its output
+# and is in the mode, we might call 'temperature control' even there is no temerature beeing controlled.
+# I don't know where the voltage is ... in order to perform the calibration, the feedback had to
+# ramp up to 2V below the operational voltage, i.e. about 1V below the breakdown voltage
+
+# We want to take a DRS amplitude calibration so we have to ramp down the bias voltage.
+# this 10sec wait is needed in order for the bias not to disconect all the time...
+> ... current calibration done
+.w 10000
+
+> switching off bias
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.w 5000
+> ...waiting for BIAS to be in state 7: VoltageOff
+.s BIAS_CONTROL 7
+> ...done
+
+# So now we can take the 3 runs, which are called DRS amplitude calibration:
+# A pedestal run with ROI=1024
+# A gain calibration run with ROI=1024
+# and a second pedestal run, with the same ROI as our next data will be, i.e. ROI=300 in this case
+> taking DRS:Pedestal 1000 ...
+> ===================================================
+> OPERATOR: 
+> observe Events tab and make sure there are no patches 
+> with strange behaviour, which can be caused 
+> by DRS-CHIP Problems
+> ===================================================
+
+FAD_CONTROL/START_DRS_CALIBRATION
+###FAD_CONTROL/SET_FILE_FORMAT 0
+MCP/START -1 1000 drs-pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4
+> ... done
+
+> taking DRS:Gain 1000 ...
+MCP/START -1 1000 drs-gain
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4
+> ... done
+
+> taking Pedestal 1000 ...
+MCP/START -1 1000 pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4
+> ... done
+
+# okay this is the DRS calibration for the next few runs.
+# we are now asked to take again a pedestal run, which can be used, to
+# calculate the electronics noise for instance ... since the shutter is closed and the
+# voltage is off .. there should not be alot of signal in it :-)
+> taking crosscheck Pedestal 1000 ...
+FAD_CONTROL/SET_FILE_FORMAT 2
+###FAD_CONTROL/SET_FILE_FORMAT 0
+MCP/START -1 1000 pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4
+> ... done
+
+# now we want to take a run, with dark counts events
+# so we need to ramp up the voltage
+# we want to use the 'current control' more so we give the commands for this...
+> switching on current controll feedback ...
+FEEDBACK/STOP
+FEEDBACK/START_CURRENT_CONTROL 0.0
+FEEDBACK/ENABLE_OUTPUT yes
+# the feedback should be in state 'CurrentControl'(12) now
+# the feedback should be in state 'CurrentCtrlIdle'(9) now since 30.05.12
+> ...waiting for FEEDBACK to be in state 9: CurrentCtrlIdle
+.s FEEDBACK 9
+> ... done
+> switching on bias
+# now we give the feedback a hint, that it may ramp ...
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+# after this command the bias_ctrl should be in state 'VoltageOn'(9) after a second or so
+> ...waiting for BIAS to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+> ...1 DAC globally set
+# then usually it takes some time until the feedback has enough information to really start controlling the voltage
+# when the feedback actually kicks in, the bias is first in state 'Ramping'(5) for some seconds and finally in 'VoltageOn'(9)
+# again
+> ...waiting for BIAS to be in state 5: Ramping
+.s BIAS_CONTROL 5
+> ...ramping to nominal voltage
+> ...waiting for BIAS to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+> ...bias on
+# here we should wait 45 sec in order for the current control to get enough current readings and temp readings to stabilize..
+> waiting 45sec for the current control to stabilize...
+.w 45000
+> ... done
+
+# so now we can take the dark count run ...
+# this might be changed in the future ... either the number of events or the the ROI might be changed
+# then the DRS calibration above, and the pedestal run in between have to be changed as well.
+> taking Pedestal with BIAS on 3000 ...
+MCP/START -1 3000 pedestal
+> ...waiting for FAD to be in state 8: Writing Data
+.s FAD_CONTROL 8
+> ...waiting for FAD to be in state 4: Connected
+.s FAD_CONTROL 4
+> ... done
+
+# at the end the bias voltage should be ramped down, since in a few seconds a shifter wit ha flashlight
+# will come out to open the shutter...
+> switching OFF bias ...
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+> ...waiting for BIAS to be in state 7: VoltageOff
+.s BIAS_CONTROL 7
+> ...done
+>
+> This is the end of First DRS Calibration
+> ----------------------------------------------------
+>

@@ -1,0 +1,12 @@
+System status
+|
+The status of several servers is displayed. The background colors denote
+if a system is...
+<ul class='help'>
+<li>...connected and ready for operation</li>
+<li>...available in the network but has no connection to its
+hardware or is not ready for operation</li>
+<li style="display:none;"/>
+<li>...not available in the dim network.</li>
+</ul>
+|

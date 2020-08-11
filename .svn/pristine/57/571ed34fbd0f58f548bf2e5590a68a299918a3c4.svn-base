@@ -1,0 +1,66 @@
+#!dimctrl --exec
+
+> --------------------------------------
+> test biasctrl
+> --------------------------------------
+> Ramping bias up and down
+
+# this is just a test, to check the order of states of biasctrl while ramping.
+
+> ...enabling feedback
+FEEDBACK/ENABLE_OUTPUT 1
+
+> ...changing file formate to: NONE
+FAD_CONTROL/SET_FILE_FORMAT 0
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 7: VoltageOff
+.s BIAS_CONTROL 7
+
+> ...changing file formate to: FITS
+FAD_CONTROL/SET_FILE_FORMAT 2
+.w 500
+
+> ...changing file formate to: NONE
+FAD_CONTROL/SET_FILE_FORMAT 0
+
+# Bias ist Off  .. switching it on
+BIAS_CONTROL/SET_GLOBAL_DAC 1
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 5: Ramping
+.s BIAS_CONTROL 5
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 9: VoltageOn
+.s BIAS_CONTROL 9
+
+> ...changing file formate to: FITS
+FAD_CONTROL/SET_FILE_FORMAT 2
+.w 500
+
+> ...changing file formate to: NONE
+FAD_CONTROL/SET_FILE_FORMAT 0
+.w 2000
+
+# Bias ist On .. switching it off
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+
+> ...waiting for BIAS_CONTROL
+>    to be in state 7: VoltageOff
+.s BIAS_CONTROL 7
+
+> ...changing file formate to: FITS
+FAD_CONTROL/SET_FILE_FORMAT 2
+.w 500
+
+> ...changing file formate to: NONE
+FAD_CONTROL/SET_FILE_FORMAT 0
+
+> --------------------------------------
+> ramped Bias up and down successfully
+> --------------------------------------

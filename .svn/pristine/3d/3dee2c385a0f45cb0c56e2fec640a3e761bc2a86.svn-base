@@ -1,0 +1,10 @@
+*Crate Reset|doCrateReset
+control|Check all boxes of the crates you want to reset. 
+To start the crate reset press the '&gt;' button at the bottom
+of the screen. The crate reset will take about 40s. It is finished
+when the script has finished. It is advisable to cross check
+that everything went smooth.|
+|checkbox=Reset crate 0/crate0/0/|
+|checkbox=Reset crate 1/crate1/0/|
+|checkbox=Reset crate 2/crate2/0/|
+|checkbox=Reset crate 3/crate3/0/|

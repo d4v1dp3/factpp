@@ -1,0 +1,34 @@
+#!dimctrl --exec
+
+# DIMSCRIPT  -- drs_calib  --- this is the first part of former DataTaking1 .. the part which was different from DataTaking2
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "drs_calib -- starting up... " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+FEEDBACK/ENABLE_OUTPUT no
+BIAS_CONTROL/SET_ZERO_VOLTAGE
+.s BIAS_CONTROL 7
+FAD_CONTROL/START_DRS_CALIBRATION
+.! echo `date -u`  "bias voltage is switched off" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u`  "taking DRS:Pedestal 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-pedestal
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u`  "taking DRS:Gain 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-gain
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u`  "taking DRS:Pedestal 1000 ..." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 drs-pedestal
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u`  "... done" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "this is the end of drs_ampl_calib" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log

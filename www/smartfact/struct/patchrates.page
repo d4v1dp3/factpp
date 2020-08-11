@@ -1,0 +1,6 @@
+Patch rates
+trigger|Min. patch rate|$0 Hz|
+trigger|Med. patch rate|$0 Hz|
+trigger|Avg. patch rate|$0 Hz|
+trigger|Max. patch rate|$0 Hz|
+|camera=cam-ftmcontrol-patchrates.bin/ Hz|

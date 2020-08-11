@@ -1,0 +1,8 @@
+FACT
+|System status|$0|status
+|Drive|$0|tracking
+|Relative camera temp|$0&deg;C|fsc
+|Weather (hum/wind)|$0% / $1km/h|weather
+|Trigger rate|$0|trigger
+|G-APD (med/max)|$0&micro;A / $1&micro;A [$2]|bias
+|camera=cam-fadcontrol-eventdata.bin/ V|

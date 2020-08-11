@@ -1,0 +1,6 @@
+Temperature
+weather|Current|$0&deg;C|
+weather|Minimum|$0&deg;C|
+weather|Average|$0&deg;C|
+weather|Maximum|$0&deg;C|
+|hist=hist-magicweather-temp.bin/&deg;C|

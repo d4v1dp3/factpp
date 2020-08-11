@@ -1,0 +1,29 @@
+#!dimctrl --exec
+
+# DIMSCRIPT
+.! echo `date -u`  "take ped and LPext" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo
+
+.! echo `date -u`  "take 100 LP events for the beedback to stabilize " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+FEEDBACK/ENABLE_OUTPUT yes
+FAD_CONTROL/SET_FILE_FORMAT 0
+FEEDBACK/SET_Ki 0.8
+MCP/START -1 500 light-pulser-ext
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+FEEBACK/SET_Ki 0.55
+FEEDBACK/ENABLE_OUTPUT no
+FAD_CONTROL/SET_FILE_FORMAT 2
+.! echo `date -u`  "take PED " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 pedestal
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u`  "take LPext " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+MCP/START -1 1000 light-pulser-ext
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+FEEDBACK/ENABLE_OUTPUT yes
+.! echo `date -u`  " .. done .. " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log

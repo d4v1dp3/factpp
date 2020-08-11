@@ -1,0 +1,18 @@
+Current prediction
+|
+From the zenith angle of the moon, the distance to the moon and
+the moon disc, it is possible to predict the expected current per
+pixel quite accurately.
+
+The shows this predicition of all sources visible between the start of
+the astronomical twilight in the evening and the end of the
+astronomical twilight in the morning.
+
+The title shows roughly the start and end time of the time range displayed
+and the number of minutes corresponding to one of the twenty
+steps on the x-axis.
+
+To relate the curves to the sources, the maximum predicted current for
+each source is given above the graphics in brackets. The sources are ordered
+in time when the maximum is reached.
+|

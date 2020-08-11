@@ -1,0 +1,40 @@
+Description
+|<h4>Description tag</h4>
+There are a few special tags for the description in the page-file.
+
+The tags are
+
+<pre>
+camera=filename/unit<br/>
+hist=filename/unit<br/>
+image=filename
+</pre>
+
+In the case of camera and hist, a binary file is loaded which contains the
+data to be displayed. The file-format for this i discussed hereafter.
+In case of the image-tag an HTML image tag is included showing the
+image loaded full-width in the row.
+
+If a camera graphics is displayed, the given unit is displayed at the scale
+(note that opera browser do not support text in the graphics so far).
+
+The unit can contain HTML special characters, <I>e.g.</I> &#38;micro;A
+|
+|<h4>Input tag</h4>
+For sending arguments to script (on script-pages) also a few special
+tags are available
+
+<pre>
+input=Title/name/default<br/>
+select=Title/name/item1/item2/item3<br/>
+</pre>
+
+The title is displayed on the left side of the row. The name is the 
+argument name used later in the script to indentify the arguments.
+
+<i>input</i> creates a text input field with the default as default.
+
+<i>select</i> creates a list-box with the items in the list. The default
+is the first item.
+|
+|Binary file format||help-binaryfile

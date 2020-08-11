@@ -1,0 +1,21 @@
+Binary-file format
+|<h4>Camera and histogram file format</h4> 
+The first line of the file always contains a thirteen-digit number
+which is the time (in UTC) corresponding to the contained data as Unix
+time (milli-seconds since 1/1/1970). The second line contains a
+floating point number (in human readable ascii format) representing the
+lower limit if the scale and the third line the upper limit. The next three
+lines contain the three numbers displayed on top of the graphics,
+usually the minumum, median and maximum data value. Everything
+after is considered to be the data. For some restrictions of the HTML
+GET mechanism available in JavaScript the data must not exceed ascii
+character 127. So the full scale displayed, either in colors or as
+graph, is from 0 to 127. Eeach ascii character represents one entry in
+the camera or the histogram. The number of entries in the histogram can
+be between 0 to hundreds, although more entries than a typical screen
+has pixels does not make much sense. Keep in mind that the data is
+reloaded every few seconds and the larger the file is the higher the
+network traffic is. For the camera the number of entries is fixed and
+must either be 40 (boards), 160 (patches), 320 (HV channels) or 1440
+(pixels). They must be ordered by crate, board, chip, group, channel. 
+|

@@ -1,0 +1,6 @@
+Voltage
+bias|Min. voltage|$0 V|
+bias|Med. voltage|$0 V|
+bias|Avg. voltage|$0 V|
+bias|Max. voltage|$0 V|
+|camera=cam-biascontrol-voltage.bin/ V|

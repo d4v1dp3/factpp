@@ -1,0 +1,54 @@
+URL
+|
+The url you specify when calling SmartFACT++ can contain links to the
+page you intend to view first, but also special arguments for steering
+the display, <I>e.g.</I>
+
+<pre>
+http://[url]/?w=320&h=200#status
+</pre>
+
+Would open the status page (status.page) and display the content
+with a fixed size of 320x200. Both, width and height, can be omitted.
+
+Also possible
+
+<pre>
+http://[url]/?max
+</pre>
+
+Usually the graphic is adapted to fit into the viewport (the size of
+your browser window). This option instructs SmartFACT++ to display the 
+graphics always quadratically and with the full width, <I>i.e.</I> it
+might range outside of your window on the bottom of your page and a scroll
+bas would be displayed.
+
+Since SmartFACT++ is also meant for mobile devices, some compromises had
+to be made. One is that modern HTML5 techniques could not be applied to
+the fullest. If your browser has problems with switching pages, you
+can turn off the sliding effect by:
+
+<pre>
+http://[url]/?noslide
+</pre>
+
+On pages which are regularly updated, <i>i.e.</i> the main page and
+the status page, sound output for certain circumstances can be enabled
+with the sound option:
+
+<pre>
+http://[url]/?sound
+</pre>
+
+All of the options can be combined as long as they make sense, <i>e.g.</i>
+
+<pre>
+http://[url]/?noslide&sound
+</pre>
+
+In all examples above the url would usually be
+
+<pre>
+www.fact-project.org/smartfact
+</pre>
+|

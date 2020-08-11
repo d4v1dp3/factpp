@@ -1,0 +1,52 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Data taking and tracking script for 1ES 2344+54.4
+# ==========================================================================
+
+# call it by: .x ScriptsForDimCtrl/Take2344.dim
+
+# ----------------------------------------------------
+>
+> ======================================
+> Data taking and tracking script for
+> 1ES 2344+54.4
+> ======================================
+> starting up...
+>
+
+
+# changing tracking to Wobble 1
+.x ScriptsForDimCtrl/ServiceScripts/Track2344Wobble1.dim
+
+# Wait for drivectrl to reply that its tracking the given source
+.x ScriptsForDimCtrl/ServiceScripts/WaitForTracking.dim
+
+# starting data taking of Wobble 1
+.x ScriptsForDimCtrl/DataTaking1.dim
+
+# --------------------------------------
+# Label for processing only Wobble position 2
+# call like this .x ScriptsForDimCtrl/Take2344.dim:2
+:2
+# --------------------------------------
+
+# changing tracking to Mrk 421 Wobble 2
+.x ScriptsForDimCtrl/ServiceScripts/Track2344Wobble2.dim
+
+# Wait for drivectrl to reply that its tracking the given source
+.x ScriptsForDimCtrl/ServiceScripts/WaitForTracking.dim
+
+# data taking to Mrk 421 Wobble 2
+.x ScriptsForDimCtrl/DataTaking2.dim
+
+# Stop tracking
+.x ScriptsForDimCtrl/ServiceScripts/StopTracking.dim
+
+> ======================================
+> Data taking and tracking script for
+> 1ES 2344+54.4 --> FINISHED
+> ======================================
+>
+
+

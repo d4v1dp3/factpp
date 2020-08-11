@@ -1,0 +1,6 @@
+Bias
+|Voltage||voltage
+|Current||current
+|Current prediction||current-prediction
+|Feedback||feedback
+|hist=hist-biascontrol-current.bin/ &micro;A|

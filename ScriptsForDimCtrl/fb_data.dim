@@ -1,0 +1,30 @@
+#!dimctrl --exec
+
+# DIMSCRIPT
+.! echo `date -u`  "take 4x data run with feedback ON " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo `date -u`  "----------------------------------------------------" >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.! echo
+
+FEEDBACK/ENABLE_OUTPUT yes
+FAD_CONTROL/SET_FILE_FORMAT 2
+
+MCP/START 300 -1 data
+.! echo `date -u`  "taking 1/4 data runs ... feedback on ...." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+MCP/START 300 -1 data
+.! echo `date -u`  "taking 2/4 data runs ... feedback on ...." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+MCP/START 300 -1 data
+.! echo `date -u`  "taking 3/4 data runs ... feedback on ...." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+
+MCP/START 300 -1 data
+.! echo `date -u`  "taking 4/4 data runs ... feedback on ...." >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log
+.s FAD_CONTROL 8
+.s FAD_CONTROL 4
+.! echo `date -u`  " ... done ... " >> ~/FACT++/ScriptsForDimCtrl/DataTaking.log

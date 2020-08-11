@@ -1,0 +1,81 @@
+#!dimctrl --exec
+
+# ==========================================================================
+# Shutdown
+# ==========================================================================
+# Script for Software Shutdown
+
+# call it by: .x ScriptsForDimCtrl/Shutdown.dim
+
+# ----------------------------------------------------
+
+> ======================================
+> SYSTEM SHUTDOWN
+> ======================================
+> BIAS_CONTROL
+> ...checking state of biasctrl
+.s BIAS_CONTROL 9 1000 2
+> ...voltage still ON
+> ...set global zero voltage
+BIAS_CONTROL/SET_GLOBAL_DAC 0
+> ...waiting for bias ramping
+.s BIAS_CONTROL 5
+> ...ramping
+
+:2
+.s BIAS_CONTROL 7 15000 4
+> ...VoltageOff
+> ...disconnecting biascrate
+BIAS_CONTROL/DISCONNECT
+.j 5
+
+:4
+> =============
+> Bias not in state VoltageOff
+> cannot disconnect Biascrate
+> OPERATOR:
+> turn of voltage and
+> disconnect bias crate manually
+> =============
+
+:5
+> DRIVE_CONTROL
+> ...parking telescope
+DRIVE_CONTROL/STOP
+.w 2000
+DRIVE_CONTROL/PARK
+
+> FTM_CONTROL
+> ...stopping trigger
+FTM_CONTROL/STOP_TRIGGER
+
+> ...disabling all FTUs
+FTM_CONTROL/ENABLE_FTU -1 no
+>-
+> FAD_CONTROL
+> ...stopping FADs
+FAD_CONTROL/STOP
+>-
+> --------------------------------------
+> OPERATOR:
+>-
+> [Software]
+> + close or make sure shutter is closed
+> + make sure telescope is really in
+>   parking postion
+> + close cosy
+>-
+> [Hardware]
+> + turn off bias crate
+> + shutdown interlock system
+> + turn off camera agilent
+> + turn off bias agilent
+> + turn off drive
+>-
+> NEVER switch of
+> the Interlock Systems' Agilent
+>-
+> --------------------------------------
+> SYSTEM SHUTDOWN finished
+> ======================================
+

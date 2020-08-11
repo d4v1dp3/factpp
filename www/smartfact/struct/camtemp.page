@@ -1,0 +1,5 @@
+Sensor temp
+fsc|Max. sensor temp.|$0 &deg;C|
+fsc|Avg. sensor temp.|$0 &deg;C|
+fsc|Min. sensor temp.|$0 &deg;C|
+|camera=cam-fsccontrol-temperature.bin/ &deg;C|

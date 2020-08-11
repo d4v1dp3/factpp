@@ -1,0 +1,14 @@
+Histogram
+|image=fact-histogram.png|
+|<h4>min / med /max</h4>
+The minimum, median and maximum value of all values displayed in the histogram.
+|
+|<h4>Scale</h4>
+The scale of the displayed coordinate system. Note that the x-axis is
+defined by the writer and the points are always equidistant in x, even
+they might not be equidistant at all.
+|
+|<h4>Data</h4>
+The data as reloaded from the server. Note that the data is quantized
+into seven bit. Hence, the resolution is limited to 128 steps.
+|
