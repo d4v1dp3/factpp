@@ -1,8 +1,12 @@
 # Try to find the package via pkg-config
 PKG_CHECK_MODULES(MYSQL mysqlclient QUIET)
 
+IF(NOT MYSQL_FOUND)
+  PKG_CHECK_MODULES(MYSQL libmariadb QUIET)
+ENDIF()
 # Try to locate the package in the default path
 # and in the path provided by pkg-config
+
 FIND_PATH(MYSQL_INCLUDE_DIR NAMES mysql.h PATHS ${MYSQL_INCLUDE_DIRS} PATH_SUFFIXES mysql)
 FIND_LIBRARY(MYSQL_LIBRARY NAMES mysqlclient PATHS ${MYSQL_LIBRARY_DIRS})
 

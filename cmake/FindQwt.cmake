@@ -1,13 +1,15 @@
 # Try to find the package via pkg-config
-PKG_CHECK_MODULES(QWT qwt QUIET)
+
 
 # Try to locate the package in the default path
 # and in the path provided by pkg-config
 # Make sure to check for the right package
 IF(Qt4_FOUND)
+   PKG_CHECK_MODULES(QWT qwt QUIET)
    FIND_PATH(QWT_INCLUDE_DIR NAMES qwt.h PATHS ${QWT_INCLUDE_DIRS} PATH_SUFFIXES qwt-qt4)
    FIND_LIBRARY(QWT_LIBRARY NAMES qwt-qt4 PATHS ${QWT_LIBRARY_DIRS})
 ELSE()
+   PKG_CHECK_MODULES(QWT Qt5Qwt6 QUIET)
    FIND_PATH(QWT_INCLUDE_DIR NAMES qwt.h PATHS ${QWT_INCLUDE_DIRS} PATH_SUFFIXES qwt)
    FIND_LIBRARY(QWT_LIBRARY NAMES qwt-qt5 PATHS ${QWT_LIBRARY_DIRS})
 ENDIF()
