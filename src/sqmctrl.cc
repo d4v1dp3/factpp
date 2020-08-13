@@ -159,7 +159,7 @@ private:
             return;
 
         ostringstream str;
-        str << "No valid answer received from " << URL() << " within " << ceil(fTimeout*1.5) << "ms";
+        str << "No valid answer received from " << URL() << " within " << ceil(fTimeout*1.5f) << "ms";
         Error(str);
 
         PostClose(false);
@@ -213,7 +213,7 @@ private:
                                          dummy::error, dummy::bytes_transferred));
         }
 
-        fInTimeout.expires_from_now(boost::posix_time::milliseconds(fTimeout*1.5));
+        fInTimeout.expires_from_now(boost::posix_time::milliseconds(int(fTimeout*1.5f)));
         fInTimeout.async_wait(boost::bind(&ConnectionSQM::HandleReadTimeout,
                                           this, dummy::error));
     }

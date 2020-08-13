@@ -12,6 +12,8 @@
 
 #include <QtOpenGL/QGLWidget>
 
+#include <QButtonGroup>
+
 #include "externals/PixelMap.h"
 
 class QMouseEvent;

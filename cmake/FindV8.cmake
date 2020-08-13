@@ -3,8 +3,8 @@ PKG_CHECK_MODULES(V8 v8 QUIET)
 
 # Try to locate the package in the default path
 # and in the path provided by pkg-config
-FIND_PATH(V8_INCLUDE_DIR NAMES v8.h PATHS ${V8_INCLUDE_DIRS})
-FIND_LIBRARY(V8_LIBRARY NAMES v8 PATHS ${V8_LIBRARY_DIRS})
+FIND_PATH(V8_INCLUDE_DIR NAMES v8.h PATHS ${V8_INCLUDE_DIRS} /usr/include/v8-3.14 )
+FIND_LIBRARY(V8_LIBRARY NAMES v8 PATHS ${V8_LIBRARY_DIRS} /usr/lib64 )
 
 # Check if V8_LIBARARY and V8_INCLUDE_DIR is set
 # Print a message otherwise

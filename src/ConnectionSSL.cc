@@ -268,9 +268,9 @@ void ConnectionSSL::HandleHandshake(const tcp::endpoint &endpoint, const bs::err
 
 	const int optval = 30;
         // First keep alive after 30s
-	setsockopt(lowest_layer().native(), SOL_TCP, TCP_KEEPIDLE, &optval, sizeof(optval));
+	setsockopt(lowest_layer().native_handle(), SOL_TCP, TCP_KEEPIDLE, &optval, sizeof(optval));
         // New keep alive after 30s
-	setsockopt(lowest_layer().native(), SOL_TCP, TCP_KEEPINTVL, &optval, sizeof(optval));
+	setsockopt(lowest_layer().native_handle(), SOL_TCP, TCP_KEEPINTVL, &optval, sizeof(optval));
 
         if (fVerbose)
             Info("Connection established to "+host+"...");
@@ -520,7 +520,7 @@ void ConnectionSSL::SetEndpoint(const tcp::endpoint &ep)
 }
 
 ConnectionSSL::ConnectionSSL(ba::io_service& ioservice, ostream &out) : MessageImp(out),
-ssl::context(ioservice, boost::asio::ssl::context::method::sslv23_client), stream(ioservice, *this),
+ssl::context(boost::asio::ssl::context::method::sslv23_client), stream(ioservice, *this),
 fLog(0), fVerbose(true), fDebugTx(false),
 fInTimeout(ioservice), fOutTimeout(ioservice), fConnectionTimer(ioservice),
 fQueueSize(0), fConnectionStatus(kDisconnected)

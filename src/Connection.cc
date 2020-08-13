@@ -266,9 +266,9 @@ bool Connection::ConnectImp(const tcp::endpoint &endpoint, const bs::error_code&
 
 	const int optval = 30;
         // First keep alive after 30s
-	setsockopt(native(), SOL_TCP, TCP_KEEPIDLE, &optval, sizeof(optval));
+	setsockopt(native_handle(), SOL_TCP, TCP_KEEPIDLE, &optval, sizeof(optval));
         // New keep alive after 30s
-	setsockopt(native(), SOL_TCP, TCP_KEEPINTVL, &optval, sizeof(optval));
+	setsockopt(native_handle(), SOL_TCP, TCP_KEEPINTVL, &optval, sizeof(optval));
 
         if (fVerbose)
             Info("Connection established to "+host+"...");
